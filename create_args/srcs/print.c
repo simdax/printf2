@@ -6,7 +6,7 @@
 //   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2017/11/27 19:30:47 by scornaz           #+#    #+#             //
-/*   Updated: 2017/12/09 14:20:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/13 17:32:38 by simdax           ###   ########.fr       */
 //                                                                            //
 // ************************************************************************* //
 
@@ -27,9 +27,9 @@ void	print_arg(t_num *num)
 
 void	print_alternate(t_num *num)
 {
-	if (num->type == 'o')
+	if (ft_strcmp(num->type, "o"))
 		num->precision += 1;
-  	if (num->type == 'c')
+  	if (ft_strcmp(num->type, "c"))
     	write(1, "0x", 2);
 }
 

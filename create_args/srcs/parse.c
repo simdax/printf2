@@ -21,24 +21,31 @@ char	*m_itoa(long long val, int base)
     return (res);
 }
 
-static char	*ret_val(char type, void *val)
+static char	*ret_val(char *type, void *val, int base)
 {
 	return (m_itoa(
-        type == 'd' ? *(int*)val:
-        type == 'i' ? *(int*)val:
-        type == 'o' ? *(int*)val:
-        type == 'u' ? *(int*)val:
-        type == 'x' ? *(int*)val:
-        type == 'D' ? *(int*)val:
-        type == 'I' ? *(int*)val:
-        type == 'O' ? *(int*)val:
-        type == 'U' ? *(int*)val:
-        type == 'X' ? *(int*)val:
-		0, 10));	
+        ft_strcmp(type, "d") ? *(int*)val:
+        ft_strcmp(type, "i") ? *(int*)val:
+        ft_strcmp(type, "o") ? *(int*)val:
+        ft_strcmp(type, "u") ? *(int*)val:
+        ft_strcmp(type, "x") ? *(int*)val:
+        ft_strcmp(type, "D") ? *(int*)val:
+        ft_strcmp(type, "I") ? *(int*)val:
+        ft_strcmp(type, "O") ? *(int*)val:
+        ft_strcmp(type, "U") ? *(int*)val:
+        ft_strcmp(type, "X") ? *(int*)val:
+		0, base
+		));	
 }
-void	parse_value(void *value, char type, t_num *a)
+void	parse_value(void *value, char *type, t_num *a)
 {
-    a->value = ret_val(type, value);
+	a->base =
+        ft_strcmp(type, "o") ? 8:
+        ft_strcmp(type, "x") ? 16:
+        ft_strcmp(type, "O") ? 8:
+        ft_strcmp(type, "X") ? 16:
+		10;
+    a->value = ret_val(type, value, a->base);
     a->str_len = strlen(a->value);
     a->type = type;
 }
