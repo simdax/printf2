@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 18:53:49 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/08 18:54:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/13 17:20:09 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ void	parse_flags(char *str, t_num *a)
 int	main(int argc, char **argv)
 {
 	t_num		*a;
+	void		*val;
 
+	int b = atoi(argv[1]);
+	val = &b;
 	(void)argc;
 	a = (t_num*)malloc(sizeof(*a));
-	parse_value(atoi(argv[1]), 'd', a);
+	parse_value(val, argv[5][0], a);
 	a->padding = argc > 2 ? atoi(argv[2]) : 0;
 	a->precision = argc > 3 ? atoi(argv[3]) : 0;
 	if (argc > 4)

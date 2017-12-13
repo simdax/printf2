@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,18 +6,34 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/11/29 18:14:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/13 16:54:49 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
+void	dereference(char type, va_list argument, void *val)
+{
+	*val =
+        type == 'd' ? va_arg(argument, int):
+		type == 'i' ? va_arg(argument, int):
+        type == 'o' ? va_arg(argument, int):
+        type == 'u' ? va_arg(argument, unsigned int):
+        type == 'x' ? va_arg(argument, unsigned int):
+        type == 'D' ? va_arg(argument, int):
+        type == 'I' ? va_arg(argument, int):
+        type == 'O' ? va_arg(argument, int):
+        type == 'U' ? va_arg(argument, unsigned int):
+	    type == 'X' ? va_arg(argument, unsigned int):
+        va_arg(argument, unsigned int);
+}
+
 int	flags2print(va_list arg, t_flags flags)
 {
 	t_num		a;
-	int		value;
+	void		*value;
 
-	value = va_arg(arg, int);
+	dereference(flags.type, arg, value);
 	parse_value(value, flags.type, &a);
 	a.left = flags.minus ? 0 : 1;
 	a.sign = value > 0;

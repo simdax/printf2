@@ -21,9 +21,24 @@ char	*m_itoa(long long val, int base)
     return (res);
 }
 
-void	parse_value(int value, char type, t_num *a)
+static char	*ret_val(char type, void *val)
 {
-    a->value = m_itoa(value, 10);
+	return (m_itoa(
+        type == 'd' ? *(int*)val:
+        type == 'i' ? *(int*)val:
+        type == 'o' ? *(int*)val:
+        type == 'u' ? *(int*)val:
+        type == 'x' ? *(int*)val:
+        type == 'D' ? *(int*)val:
+        type == 'I' ? *(int*)val:
+        type == 'O' ? *(int*)val:
+        type == 'U' ? *(int*)val:
+        type == 'X' ? *(int*)val:
+		0, 10));	
+}
+void	parse_value(void *value, char type, t_num *a)
+{
+    a->value = ret_val(type, value);
     a->str_len = strlen(a->value);
     a->type = type;
 }

@@ -2,4 +2,4 @@
 
 echo `tput setaf 7`all args : $@
 
-diff <(../create_args $3 $1 $2 $4$5$6$7$8$9$10) <(printf "%$5$6$7$8$10$2.$3$4" $1)
+diff <(../create_args $3 $1 $2 $4$5$6$7$8$9 $10) <(printf "%$5$6$7$8$10$2.$3$4" $1)
