@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) modules
 	@echo "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
-	@$(CC) $(OBJ) $(CCFLAGS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(CCFLAGS) $(MODULES) -o $(NAME)
 
 modules:
 	ar crsT modules.a $(MODULES)

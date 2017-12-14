@@ -10,7 +10,7 @@ void print_struct(t_flags t)
     printf("%d", t.space);
     printf("%d", t.width);
     printf("%d", t.precision);
-    printf("%c", t.type ? t.type : '0');	
+    printf("%s", t.type);	
 }
 
 int main(int argc, char **argv)

@@ -31,6 +31,34 @@ static void	take_flags(char **s, t_flags *flags)
 	}
 }
 
+static void	take_type(char **s, char *flags)
+{
+  char	*str;
+  int	i;
+
+  i = 0;
+  str = *s;
+  while (*str && (ft_strany(*str, MODIFIERS) || ft_strany(*str, TYPES)))
+    {
+      if (ft_strany(*str, MODIFIERS))
+	{
+	  if (i == 1 && flags[i - 1] == flags[i])
+	    {
+	      flags[i] = *str;
+	      continue;
+	    }
+	  else if (i > 1)
+	    {
+	      *flags = 0;
+	      break;
+	    }
+	}
+      flags[i] = *str;
+      *s = ++str;
+      ++i;
+    }
+}
+
 t_flags				parse(char *str)
 {
     t_flags		flags;
@@ -49,7 +77,7 @@ t_flags				parse(char *str)
 		ft_nbrsize(flags.precision) : 0;
 	}
     if (*str)
-	flags.type = str[0];
+      take_type(&str, flags.type);
     flags.count = str - cpy;
     return (flags);
 }

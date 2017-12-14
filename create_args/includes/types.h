@@ -11,8 +11,8 @@ typedef struct		s_num
 	int			alternate; // 0 1
 	//	void			(*print)(struct s_num*);
 	int			base;	
-	char		*type;
-	int			padding; // neg means right
+	char		type[3];
+	int		padding; // neg means right
 	char		type_padding; // neg means right
 	int			left;
 	int			precision; // neg means right

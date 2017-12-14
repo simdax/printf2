@@ -34,8 +34,7 @@ static char	*ret_val(char *type, void *val, int base)
         ft_strcmp(type, "O") ? *(int*)val:
         ft_strcmp(type, "U") ? *(int*)val:
         ft_strcmp(type, "X") ? *(int*)val:
-		0, base
-		));	
+        0, base));	
 }
 void	parse_value(void *value, char *type, t_num *a)
 {

@@ -24,11 +24,14 @@ typedef struct	s_flags
 	int			space;
 	int			precision;
     	int			width;
-    char			type;
-    int				count;
+  	char			type[3];
+  	int			count;
 }				t_flags;
 
-#define SET(x,c,s)	x = x || s == c
+# define SET(x,c,s)	x = x || s == c
+# define TYPES		"diouxDIOUX"
+# define MODIFIERS	"hl"
+# define REPS		2
 
 # include <stdio.h>
 # include "libft.h"
