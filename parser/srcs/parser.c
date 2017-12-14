@@ -42,12 +42,12 @@ static void	take_type(char **s, char *flags)
     {
       if (ft_strany(*str, MODIFIERS))
 	{
-	  if (i == 1 && flags[i - 1] == flags[i])
+	  if (i == REPS && flags[i - 1] == flags[i])
 	    {
 	      flags[i] = *str;
 	      continue;
 	    }
-	  else if (i > 1)
+	  else if (i > REPS)
 	    {
 	      *flags = 0;
 	      break;

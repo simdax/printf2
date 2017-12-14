@@ -14,43 +14,45 @@
 
 void	parse_flags(char *str, t_num *a)
 {
-    a->type_padding = ' ';
-	a->base = 10;
-    a->sign = 0;
-    a->alternate = 0;
-    a->left = 1;
-    while (*str)
-	{
-	    if (*str == '#')
-		a->alternate = 1;
-	    if (*str == '0')
-		a->type_padding = '0';
-	    if (*str == '+')
-		a->sign = 1;
-	    if (*str == '-')
-		a->left = -1;
-	    ++str;
-	}
+  a->type_padding = ' ';
+  a->base = 10;
+  a->sign = 0;
+  a->alternate = 0;
+  a->left = 1;
+  while (*str)
+    {
+      if (*str == '#')
+	a->alternate = 1;
+      if (*str == '0')
+	a->type_padding = '0';
+      if (*str == '+')
+	a->sign = 1;
+      if (*str == '-')
+	a->left = -1;
+      ++str;
+    }
 }
 
 int	main(int argc, char **argv)
 {
-	t_num		*a;
-	void		*val;
+  t_num		*a;
+  void		*val;
 
-	int b = atoi(argv[1]);
-	val = &b;
-	(void)argc;
-	a = (t_num*)malloc(sizeof(*a));
-	ft_bzero(a, sizeof(*a));
-	parse_value(val, argv[5], a);
-	a->padding = argc > 2 ? atoi(argv[2]) : 0;
-	a->precision = argc > 3 ? atoi(argv[3]) : 0;
-	if (argc > 4)
-		parse_flags(argv[4], a);
-	else
-		parse_flags("", a);
-	re_orga(a);
-	print_arg(a);
-	free(a->value);
+  int b = atoi(argv[1]);
+  val = &b;
+  (void)argc;
+  a = (t_num*)malloc(sizeof(*a));
+  ft_bzero(a, sizeof(*a));
+  if (parse_value(val, argv[5] ? argv[5] : "d", a));
+  {
+    a->padding = argc > 2 ? atoi(argv[2]) : 0;
+    a->precision = argc > 3 ? atoi(argv[3]) : 0;
+    if (argc > 4)
+      parse_flags(argv[4], a);
+    else
+      parse_flags("", a);
+    re_orga(a);
+    print_arg(a);
+    free(a->value);	  
+  }
 }

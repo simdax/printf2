@@ -31,7 +31,7 @@ typedef struct	s_flags
 # define SET(x,c,s)	x = x || s == c
 # define TYPES		"diouxDIOUX"
 # define MODIFIERS	"hl"
-# define REPS		2
+# define REPS		1
 
 # include <stdio.h>
 # include "libft.h"

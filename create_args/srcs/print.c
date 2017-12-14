@@ -14,11 +14,11 @@
 
 void	print_arg(t_num *num)
 {
-  if (num->alternate)
-    print_alternate(num);
   if (num->left)
     print_padding(num->padding, num->type_padding, &num->count);
-  print_sign(num->sign, &num->count);
+  if (num->alternate)
+    print_alternate(num);
+  print_sign(num->sign, &num->count, num->type);
   print_padding(num->precision, '0', &num->count);
   write(1, num->value, num->str_len);
   if (!num->left)
@@ -27,10 +27,10 @@ void	print_arg(t_num *num)
 
 void	print_alternate(t_num *num)
 {
-	if (ft_strcmp(num->type, "o"))
-		num->precision += 1;
-  	if (ft_strcmp(num->type, "c"))
-    	write(1, "0x", 2);
+  if (ft_strchr("o", num->type))
+    num->precision += 1;
+  else if (ft_strany(num->type, "x"))
+    write(1, "0x", 2);
 }
 
 void	print_padding(size_t count, char with, size_t *c)
@@ -42,8 +42,10 @@ void	print_padding(size_t count, char with, size_t *c)
   }
 }
 
-void	print_sign(int sign, size_t *c)
+void	print_sign(int sign, size_t *c, char type)
 {
+  if (ft_strany(type, "oxu"))
+    return ;
   if (sign == -1)
     {
       ft_putchar('-');

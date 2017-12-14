@@ -1,25 +1,20 @@
 #!/bin/bash
 
-values=(1 20 50)
-width=(0 1 2)
-precision=(0 1 2)
+values=(20)
+width=(1)
+precision=(1)
 #flags
 minus=("-" '')
 plus=("+" '')
-space=(' ' '')
-alternate=("#" '')
-zero=("0" '')
+space=(' ' "")
+alternate=("#" "")
+zero=("0" "")
 #types
 types=(d i o u x ld li lo lu lx)
 
-function go {
-    #res=`timeout 1 ./test $i $j $k`
-    res=`./test $@`
-    case $res in
- 	124) echo `tput setaf 2`KO ;;
- 	*)   echo `tput setaf 9`$res ;;
-    esac
-}
+
+rm -rf log
+
 
 for value in ${values[@]}; do
     for w in ${width[@]}; do
@@ -29,7 +24,7 @@ for value in ${values[@]}; do
 		    for zero in ${zero[@]}; do
 			for alt in ${alternate[@]}; do
 				for typ in ${types[@]}; do
-				    go $value $w $prec $zero $min $pl $sp $alt $typ
+				    ./test $value $w $prec $typ $zero $min $pl $sp $alt
 			    done
 			done
 		    done
