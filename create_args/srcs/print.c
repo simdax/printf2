@@ -6,7 +6,7 @@
 //   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2017/11/27 19:30:47 by scornaz           #+#    #+#             //
-/*   Updated: 2017/12/13 17:32:38 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/15 17:07:41 by scornaz          ###   ########.fr       */
 //                                                                            //
 // ************************************************************************* //
 
@@ -19,7 +19,7 @@ void	print_arg(t_num *num)
   if (num->alternate)
     print_alternate(num);
   print_sign(num->sign, &num->count, num->type);
-  print_padding(num->precision, '0', &num->count);
+  print_padding(num->precision, num->type_padding, &num->count);
   write(1, num->value, num->str_len);
   if (!num->left)
     print_padding(num->padding, num->type_padding, &num->count);

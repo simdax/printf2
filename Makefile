@@ -5,6 +5,7 @@ NAME = printf
 #  ╓─────[ Compiler ]─  
 #  ╙───────────────────── ─ ─ 
 CC = gcc
+LINK = ar rc
 CCFLAGS = -g # -Wall -Werror -Wextra
 MODULES = libft/libft.a parser/parser.a create_args/create_args.a
 LDFLAGS = modules.a
@@ -12,7 +13,7 @@ LDFLAGS = modules.a
 #  ╓─────[ Functions ]─  
 #  ╙───────────────────── ─ ─
 
-SRC = ft_printf.c main.c
+SRC = ft_printf.c
 INC = $(addprefix -I, libft includes create_args/includes parser/includes)
 OBJ = $(SRC:.c=.o)
 
@@ -24,12 +25,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ) #modules
 	@echo "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
-	$(CC) $(OBJ) $(CCFLAGS) $(MODULES) -o $(NAME)
+	ar rc libft$(NAME).a ft_printf.o create_args/*o parser/*o libft/*o
 
 alllibs:
 	make -C libft &
 	make -C parser lib &
-	make -C create_args
+	make -C create_args lib
 
 modules:
 	ar crsT modules.a $(MODULES)
@@ -53,10 +54,12 @@ fclean: clean
 re:
 	@$(MAKE) fclean
 	@$(MAKE) all
+
 debug: all
 	lldb $(NAME)
 
-test:
+test: all
+	$(CC) main.c libft$(NAME).a -o $(NAME)
 	cd tests && ./main
 
 lib:

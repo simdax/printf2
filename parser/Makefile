@@ -49,7 +49,7 @@ test: all
 	cd tests && ./main
 
 commit: test
-	git commit -am "tests OK" && git push
+	git commit . -m "tests OK" && git push
 
 prod:
 	make CCFLAGS="-Wall -Wextra -Werror" re
