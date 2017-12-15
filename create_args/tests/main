@@ -10,7 +10,7 @@ space=(' ' "")
 alternate=("#" "")
 zero=("0" "")
 #types
-types=(d i o u x ld li lo lu lx)
+types=(d i o u x ld li lo lu lx lld lli llo llu llx)
 
 
 rm -rf log

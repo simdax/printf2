@@ -42,6 +42,8 @@ static void	take_type(char **s, char *flags)
     {
       if (ft_strany(*str, MODIFIERS))
 	{
+	  if (i && ft_strchr(TYPES, flags[i - 1]))
+	    return ;
 	  if (i == REPS && flags[i - 1] == flags[i])
 	    {
 	      flags[i] = *str;

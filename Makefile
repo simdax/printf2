@@ -22,9 +22,14 @@ vpath %.c srcs/
 #  ╙───────────────────── ─ ─
 all: $(NAME)
 
-$(NAME): $(OBJ) modules
+$(NAME): $(OBJ) #modules
 	@echo "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
-	@$(CC) $(OBJ) $(CCFLAGS) $(MODULES) -o $(NAME)
+	$(CC) $(OBJ) $(CCFLAGS) $(MODULES) -o $(NAME)
+
+alllibs:
+	make -C libft &
+	make -C parser lib &
+	make -C create_args
 
 modules:
 	ar crsT modules.a $(MODULES)

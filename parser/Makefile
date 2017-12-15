@@ -35,6 +35,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf $(NAME).a
 	@echo  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
 
 re: fclean all
@@ -48,7 +49,7 @@ test: all
 	cd tests && ./main
 
 commit: test
-	git commit -am "tests OK"
+	git commit -am "tests OK" && git push
 
 prod:
 	make CCFLAGS="-Wall -Wextra -Werror" re

@@ -23,17 +23,8 @@ char	*m_itoa(long long val, int base)
 
 static char	*ret_val(char *type, void *val, int base)
 {
-  return (m_itoa(
-		 ft_strcmp(type, "d") ? *(int*)val:
-		 ft_strcmp(type, "i") ? *(int*)val:
-		 ft_strcmp(type, "o") ? *(int*)val:
-		 ft_strcmp(type, "u") ? *(int*)val:
-		 ft_strcmp(type, "x") ? *(int*)val:
-		 ft_strcmp(type, "D") ? *(int*)val:
-		 ft_strcmp(type, "I") ? *(int*)val:
-		 ft_strcmp(type, "O") ? *(int*)val:
-		 ft_strcmp(type, "U") ? *(int*)val:
-		 ft_strcmp(type, "X") ? *(int*)val:
+  return (m_itoa(ft_strchr("diDI", type) ? *(int*)val:
+		 ft_strchr("ouxOUX", type) ? *(unsigned int*)val:
 		 0, base));	
 }
 int	parse_value(void *value, char *type, t_num *a)
