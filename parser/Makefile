@@ -1,11 +1,12 @@
-#  ╓─────[ Target ]─  
+#  ╓─────[ Target and vars ]─  
 #  ╙───────────────────── ─ ─ 
 NAME := parser
+COMMIT_MSG := "tests OK"
 
 #  ╓─────[ Compiler ]─  
 #  ╙───────────────────── ─ ─ 
 CC := gcc
-CCFLAGS := -g #-Wall -Werror -Wextra -g
+CCFLAGS := -g3 #-Wall -Werror -Wextra -g
 LDFLAGS := ../libft/libft.a
 
 #────[ Functions ]─  
@@ -49,7 +50,7 @@ test: all
 	cd tests && ./main
 
 commit: test
-	git commit . -m "tests OK" && git push
+	git commit . -m $(COMMIT_MSG) && git push
 
 prod:
 	make CCFLAGS="-Wall -Wextra -Werror" re

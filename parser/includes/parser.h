@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 14:27:19 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/09 17:19:49 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/18 18:35:12 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_flags
 }				t_flags;
 
 # define SET(x,c,s)	x = x || s == c
-# define TYPES		"diouxDIOUX"
+# define TYPES		"diouxDIOUX%"
 # define MODIFIERS	"hl"
 # define REPS		1
 
