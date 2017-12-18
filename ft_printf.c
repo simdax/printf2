@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -52,8 +52,8 @@ t_num	flags2print(va_list arg, t_flags flags)
   a.count = 0;
   a.precision = IF(a.precision - a.str_len);
   a.padding = IF(ABS(a.padding) - a.str_len + a.precision);
-  print_arg(&a);
-//  free(a.value);
+  //  print_arg(&a);
+  //  free(a.value);
   // free(value);
   return (a);
 }
@@ -72,32 +72,50 @@ static int		count_percents(const char *str)
   return (count);
 }
 
+static int		print(char **str, t_num *nums, int len)
+{
+  int	count;
+  char	*cpy;
+
+  count = 0;
+  while (len--) {
+    ft_putstr(*str);
+    count += ft_strlen(*str);
+    ++str;
+    print_arg(nums);
+    count += nums->count;	  
+    ++nums;
+  }
+  if (str)
+    ft_putstr(*str);
+  return (count);
+}
+
 int			ft_printf(const char* str, ...)
 {
   va_list	arg;
   int		nb_args;
   char		*cpy;
-  int		count;
+  char		**stock;
   t_num		*nums;
-  t_flags flags;
+  t_flags	flags;
     
-  count = 0;
+  int count = 0;
   nb_args = count_percents(str);
-  nums = (t_num*)malloc(sizeof(t_num) * nb_args + 1);
+  nums = (t_num*)malloc(sizeof(t_num) * (nb_args + 1));
+  stock = (char**)malloc(sizeof(char*) * (nb_args + 2));
   if (nb_args){
     va_start(arg, str);
-    while (nb_args--) {
+    while (count < nb_args) {
       cpy = ft_strchr(str, '%');
-      count += cpy - str;
-      //write(1, str, cpy - str);
-	  flags = parse(cpy + 1);
-	  *nums = flags2print(arg, flags);
-	  count += nums->count;	  
-	  str = cpy + flags.count + 1;
-	  nums++;
+      stock[count] = ft_strsub(str, 0, cpy - str);
+      flags = parse(cpy + 1);
+      nums[count] = flags2print(arg, flags);
+      str = cpy + flags.count + 1;
+      ++count;
     }
-	   va_end(arg);
-    ft_putstr(str);
+    va_end(arg);
   }
-  return (count);
+  stock[count] = str;
+  return(print(stock, nums, nb_args));
 }
