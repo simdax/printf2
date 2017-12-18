@@ -5,7 +5,7 @@ NAME := create_args
 #  ╓─────[ Compiler ]─  
 #  ╙───────────────────── ─ ─ 
 CC := gcc
-CCFLAGS := -g #ppWextra Wextra Wextra 
+CCFLAGS := -g3 #ppWextra Wextra Wextra 
 LDFLAGS := ../libft/libft.a
 LIB := ../libft
 

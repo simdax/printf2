@@ -23,6 +23,8 @@ char	*m_itoa(long long val, int base)
 
 static char	*ret_val(char type, void *val, int base)
 {
+  if (type == '%')
+    return ("%");
   return (m_itoa(ft_strchr("diDI", type) ? *(int*)val:
 		 ft_strchr("ouxOUX", type) ? *(unsigned int*)val:
 		 0, base));	
@@ -59,6 +61,5 @@ void	re_orga(t_num *a)
 {
   a->count = 0;
   a->precision = IF(a->precision - a->str_len);
-  //a->left = a->padding >= 0;
-  a->padding = IF(ABS(a->padding) - a->str_len + a->precision);
+  a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
 }
