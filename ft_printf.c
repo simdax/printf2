@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/18 19:16:08 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/18 23:40:41 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	dereference(char type, va_list argument, void *val)
       tt.i = va_arg(argument, int);
       *(int*)val = tt.i;
     }
-  if ((ft_strany(type, "ouxOUX")))
+  else if ((ft_strany(type, "ouxOUX")))
     {
       tt.u = va_arg(argument, unsigned int);
       *(unsigned int*)val = tt.u;
@@ -41,6 +41,7 @@ t_num	flags2print(va_list arg, t_flags flags)
 
   value = malloc(32);
   dereference('d', arg, value);
+  //  value = va_arg(arg, long long);
   parse_value(value, flags.type, &a);
   a.left = flags.minus ? 0 : 1;
   a.sign = value > 0;
@@ -48,15 +49,13 @@ t_num	flags2print(va_list arg, t_flags flags)
   a.precision = flags.precision;
   a.alternate = flags.hash;
   a.type_padding = flags.zero && !ft_strchr("DIOUXdioux", a.type) ? '0' : ' ';
-  a.count = 0;
   a.precision = IF(a.precision - a.str_len);
-  a.padding = IF(ABS(a.padding) - a.str_len + a.precision);
+  a.padding = IF(ABS(a.padding) - a.str_len - a.precision);
   //  print_arg(&a);
   //  free(a.value);
   // free(value);
   return (a);
 }
-
 
 static int		count_percents(const char *str)
 {

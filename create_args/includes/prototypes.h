@@ -1,6 +1,6 @@
 void	choose_itoa(char type, void *val, size_t *c);
 void	itoa_base_dioux(unsigned int *i, size_t base, size_t *c);
-char	*m_itoa(long long val, int base);
+char	*m_itoa(long long val, int base, int maj);
 void	parse_flags(char *str, t_num *a);
 int	parse_value(void *value, char* type, t_num *a);
 void	print_alternate(t_num *type);

@@ -6,7 +6,7 @@
 //   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2017/11/27 19:30:47 by scornaz           #+#    #+#             //
-/*   Updated: 2017/12/18 21:50:37 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/18 23:20:18 by simdax           ###   ########.fr       */
 //                                                                            //
 // ************************************************************************* //
 
@@ -15,10 +15,7 @@
 void	print_arg(t_num *num)
 {
   if (num->type == '%')
-    {
       write(1, "%", 1);
-      ++(num->count);
-    }
   else {
     if (num->left)
       print_padding(num->padding, num->type_padding, &num->count);
@@ -37,7 +34,13 @@ void	print_alternate(t_num *num)
   if (ft_strchr("o", num->type))
     num->precision += 1;
   else if (ft_strany(num->type, "x"))
-    write(1, "0x", 2);
+    {
+      if (ft_strchr("DIOUX", num->type))
+        write(1, "0X", 2);
+      else
+        write(1, "0x", 2);
+      num->count += 2;
+    }
 }
 
 void	print_padding(size_t count, char with, size_t *c)
@@ -51,7 +54,7 @@ void	print_padding(size_t count, char with, size_t *c)
 
 void	print_sign(int sign, size_t *c, char type)
 {
-  if (ft_strany(type, "oxu"))
+  if (ft_strany(type, "OXUoxu"))
     return ;
   if (sign == -1)
     {

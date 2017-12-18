@@ -6,7 +6,7 @@ NAME = printf
 #  ╙───────────────────── ─ ─ 
 CC = gcc
 LINK = ar rc
-CCFLAGS = -g # -Wall -Werror -Wextra
+CCFLAGS = -g3 # -Wall -Werror -Wextra
 MODULES = libft/libft.a parser/parser.a create_args/create_args.a
 LDFLAGS = modules.a
 
