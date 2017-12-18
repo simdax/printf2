@@ -50,7 +50,7 @@ test: all
 	cd tests && ./main
 
 commit: test
-	git commit . -m $(COMMIT_MSG) && git push
+	git commit srcs Makefile tests includes -m $(COMMIT_MSG) && git push
 
 prod:
 	make CCFLAGS="-Wall -Wextra -Werror" re

@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 17:48:34 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/18 18:44:18 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/18 22:09:26 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_flags				parse(char *str)
       ++str;
       flags.precision = ft_atoi(str);
       str += flags.precision ?
-        ft_nbrsize(flags.precision) : 0;
+        ft_nbrsize(flags.precision) :
+        str[0] == '0' ? 1 : 0;
     }
   if (*str)
     take_type(&str, flags.type);
