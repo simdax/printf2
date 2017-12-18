@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 17:48:34 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/18 22:09:26 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 00:06:02 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,22 @@ static void	take_type(char **s, char *flags)
 
   i = 0;
   str = *s;
-  while (*str && (ft_strany(*str, MODIFIERS) || ft_strany(*str, TYPES)))
+  while (*str && (ft_strany(*str, MODIFIERS1) ||
+                  ft_strany(*str, MODIFIERS2) ||
+                  ft_strany(*str, TYPES)))
     {
-      if (ft_strany(*str, MODIFIERS))
+      if (i && (ft_strchr(TYPES, flags[i - 1]) ||
+                ft_strchr(MODIFIERS1, flags[i - 1])
+                ))
+        return ;
+      if (ft_strany(*str, MODIFIERS2))
 	{
-	  if (i && ft_strchr(TYPES, flags[i - 1]))
-	    return ;
-	  if (i == REPS && flags[i - 1] == flags[i])
+	  if (i == 1 && flags[i - 1] == flags[i])
 	    {
 	      flags[i] = *str;
 	      continue;
 	    }
-	  else if (i > REPS)
+	  else if (i > 1)
 	    {
 	      *flags = 0;
 	      break;
