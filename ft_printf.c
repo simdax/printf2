@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/15 18:23:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/18 18:29:56 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ typedef union   u_tt
   int		i;
   unsigned int 	u;
 }		t_tt;
-
 
 void	dereference(char type, va_list argument, void *val)
 {
@@ -67,7 +66,10 @@ static int		count_percents(const char *str)
   while (*str) {
     if (*str == '%')
       count++;
-    str++;
+    if (str[1] == '%')
+      str += 2;
+    else
+      str++;
   }
   return (count);
 }
@@ -87,7 +89,10 @@ static int		print(char **str, t_num *nums, int len)
     ++nums;
   }
   if (str)
-    ft_putstr(*str);
+    {
+      ft_putstr(*str);
+      count += ft_strlen(*str);
+    }
   return (count);
 }
 
@@ -99,8 +104,9 @@ int			ft_printf(const char* str, ...)
   char		**stock;
   t_num		*nums;
   t_flags	flags;
-    
-  int count = 0;
+  int		count;
+
+  count = 0;
   nb_args = count_percents(str);
   nums = (t_num*)malloc(sizeof(t_num) * (nb_args + 1));
   stock = (char**)malloc(sizeof(char*) * (nb_args + 2));
@@ -108,10 +114,18 @@ int			ft_printf(const char* str, ...)
     va_start(arg, str);
     while (count < nb_args) {
       cpy = ft_strchr(str, '%');
-      stock[count] = ft_strsub(str, 0, cpy - str);
-      flags = parse(cpy + 1);
-      nums[count] = flags2print(arg, flags);
-      str = cpy + flags.count + 1;
+      if (cpy && cpy[1] == '%')
+        {
+          stock[count] = "%";
+          str += 2;
+        }
+      else
+        {   
+          stock[count] = ft_strsub(str, 0, cpy - str);
+          flags = parse(cpy + 1);
+          nums[count] = flags2print(arg, flags);
+          str = cpy + flags.count + 1;
+        }
       ++count;
     }
     va_end(arg);

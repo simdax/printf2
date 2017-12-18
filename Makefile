@@ -59,7 +59,7 @@ debug: all
 	lldb $(NAME)
 
 test: all
-	$(CC) main.c libft$(NAME).a -o $(NAME)
+	$(CC) -g main.c libft$(NAME).a -o $(NAME)
 	cd tests && ./main
 
 lib:
