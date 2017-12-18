@@ -14,7 +14,7 @@ typedef struct		s_num
   char			type;
   char			*modifiers;
   int			padding; // neg means right
-  char			type_padding; // neg means right
+  char			zero; // neg means right
   int	       		left;
   int    		precision; // neg means right
   char			*value;

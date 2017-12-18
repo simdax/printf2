@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 18:53:49 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/18 21:48:57 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 00:17:34 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	parse_flags(char *str, t_num *a)
 {
-  a->type_padding = ' ';
   a->base = 10;
   a->sign = 0;
   a->alternate = 0;
@@ -24,7 +23,7 @@ void	parse_flags(char *str, t_num *a)
       if (*str == '#')
 	a->alternate = 1;
       if (*str == '0')
-	a->type_padding = '0';
+	a->zero = '0';
       if (*str == '+')
 	a->sign = 1;
       if (*str == '-')

@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 23:02:14 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/18 23:10:21 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 00:13:23 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ret_val(char type, void *val, int base)
                  base, (long)ft_strchr("DIOUX", type)));	
 }
 
-int	parse_value(void *value, char *type, t_num *a)
+static int	split_type(char *type, t_num *a)
 {
   if (type && ft_strlen(type) == 1)
     {
@@ -65,6 +65,13 @@ int	parse_value(void *value, char *type, t_num *a)
       a->type = type[2];
     }
   else
+    return (0);
+  return (1);
+}
+
+int	parse_value(void *value, char *type, t_num *a)
+{
+  if (!split_type(type, a))
     return (0);
   a->base =
     ft_strchr("oO", a->type) ? 8:
