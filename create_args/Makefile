@@ -27,13 +27,13 @@ all: $(NAME)
 $(NAME): $(OBJ) ../libft/libft.a
 	@$(CC) $(CCFLAGS) $(INC) main.c -c
 	@$(CC) main.o $(OBJ) $(CCFLAGS) $(LDFLAGS) -o $(NAME)
-	@echo "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
+	@echo -e "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
 
 ../libft/libft.a:
 	cd ../libft && make
 
 %.o : %.c
-	@echo "\033[0;32m [OK] \033[0m \033[0;33m Compiling:\033[0m " $@
+	@echo -e "\033[0;32m [OK] \033[0m \033[0;33m Compiling:\033[0m " $@
 	@$(CC) $(CCFLAGS) $(INC)  -c -o $@ $<
 
 clean:
@@ -43,7 +43,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME).a
-	@echo  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
+	@echo -e  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
 
 re:
 	@$(MAKE) fclean

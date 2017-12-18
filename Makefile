@@ -24,11 +24,11 @@ vpath %.c srcs/
 all: $(NAME)
 
 $(NAME): $(OBJ) #modules
-	@echo "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
+	@echo -e "\n\033[0;32m [OK] \033[0m \033[0;33m Linking binary:\033[0m " $(NAME)
 	ar rc libft$(NAME).a ft_printf.o create_args/*o parser/*o libft/*o
 
 alllibs:
-	make -C libft &
+	make -C libft
 	make -C parser lib &
 	make -C create_args lib
 
@@ -39,8 +39,8 @@ modules:
 	make -C $@ lib
 
 %.o : %.c
-	@echo "\033[0;32m [OK] \033[0m \033[0;33m Compiling:\033[0m " $@
-	@echo	@$(CC) $(CCFLAGS) $(INC)  -c -o $@ $<
+	@echo -e "\033[0;32m [OK] \033[0m \033[0;33m Compiling:\033[0m " $@
+	@echo -e	@$(CC) $(CCFLAGS) $(INC)  -c -o $@ $<
 	@$(CC) $(CCFLAGS) $(INC)  -c -o $@ $<
 
 clean:
@@ -49,7 +49,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
+	@echo -e  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
 
 re:
 	@$(MAKE) fclean

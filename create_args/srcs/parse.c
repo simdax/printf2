@@ -21,7 +21,7 @@ char	*m_itoa(long long val, int base)
   return (res);
 }
 
-static char	*ret_val(char *type, void *val, int base)
+static char	*ret_val(char type, void *val, int base)
 {
   return (m_itoa(ft_strchr("diDI", type) ? *(int*)val:
 		 ft_strchr("ouxOUX", type) ? *(unsigned int*)val:
@@ -50,7 +50,7 @@ int	parse_value(void *value, char *type, t_num *a)
     ft_strchr("oO", a->type) ? 8:
     ft_strchr("xX", a->type) ? 16:
     10;
-  a->value = ret_val(type, value, a->base);
+  a->value = ret_val(a->type, value, a->base);
   a->str_len = strlen(a->value);
   return (1);
 }
