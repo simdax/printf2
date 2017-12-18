@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+/*                                                    +:+ +:+         +:+   1  */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/18 18:29:56 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/18 19:16:08 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ static int		count_percents(const char *str)
   while (*str) {
     if (*str == '%')
       count++;
-    if (str[1] == '%')
-      str += 2;
-    else
-      str++;
+    str++;
   }
   return (count);
 }
@@ -114,18 +111,12 @@ int			ft_printf(const char* str, ...)
     va_start(arg, str);
     while (count < nb_args) {
       cpy = ft_strchr(str, '%');
-      if (cpy && cpy[1] == '%')
-        {
-          stock[count] = "%";
-          str += 2;
-        }
-      else
-        {   
-          stock[count] = ft_strsub(str, 0, cpy - str);
-          flags = parse(cpy + 1);
-          nums[count] = flags2print(arg, flags);
-          str = cpy + flags.count + 1;
-        }
+      stock[count] = ft_strsub(str, 0, cpy - str);
+      flags = parse(cpy + 1);
+      nums[count] = flags2print(arg, flags);
+      if (cpy[flags.count] == '%')
+        --nb_args;
+      str = cpy + flags.count + 1;
       ++count;
     }
     va_end(arg);

@@ -6,7 +6,7 @@
 //   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2017/11/27 19:30:47 by scornaz           #+#    #+#             //
-/*   Updated: 2017/12/18 21:21:11 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/18 21:50:37 by simdax           ###   ########.fr       */
 //                                                                            //
 // ************************************************************************* //
 
@@ -15,7 +15,10 @@
 void	print_arg(t_num *num)
 {
   if (num->type == '%')
-    write(1, "%", 1);
+    {
+      write(1, "%", 1);
+      ++(num->count);
+    }
   else {
     if (num->left)
       print_padding(num->padding, num->type_padding, &num->count);

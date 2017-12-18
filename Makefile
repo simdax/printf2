@@ -59,8 +59,8 @@ debug: all
 	lldb $(NAME)
 
 test: all
-	$(CC) -g main.c libft$(NAME).a -o $(NAME)
-	cd tests && ./main
+	@$(CC) -g tests/main.c libft$(NAME).a -o $(NAME)
+	@cd tests && ./main
 
 lib:
 	@make -C $(LIBFT)
