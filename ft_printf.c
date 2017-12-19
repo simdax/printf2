@@ -6,43 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 16:07:32 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 17:20:00 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-typedef union   u_tt
-{
-  int		i;
-  unsigned int 	u;
-  long		l;
-  long long	ll;
-}		t_tt;
-
-/* void	dereference(char type, va_list argument, void *val) */
-/* { */
-/*   t_tt tt; */
-  
-/*   if ((ft_strany(type, "diDI"))) */
-/*     { */
-/*       tt.i = va_arg(argument, int); */
-/*       *(int*)val = tt.i; */
-/*     } */
-/*   else if ((ft_strany(type, "ouxOUX"))) */
-/*     { */
-/*       tt.u = va_arg(argument, unsigned int); */
-/*       *(unsigned int*)val = tt.u; */
-/*     } */
-/*   else if ((ft_strany(type, "l"))) */
-/*     { */
-/*       tt.ll = va_arg(argument, long long); */
-/*       *(unsigned long long*)val = tt.ll; */
-/*     } */
-
-/* } */
-
-t_num	flags2print(va_list arg, t_flags flags)
+static t_num		flags2print(va_list arg, t_flags flags)
 {
   t_num		a;
   uintmax_t	value;
@@ -55,7 +25,7 @@ t_num	flags2print(va_list arg, t_flags flags)
       value = va_arg(arg, uintmax_t);
       parse_value(&value, &a);
     }
-  a.left = flags.minus ? 0 : 1;
+  a.left = !flags.minus;
   a.padding = flags.width;
   a.precision = flags.precision;
   a.alternate = flags.hash;
