@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 17:20:00 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 18:51:07 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static t_num		flags2print(va_list arg, t_flags flags)
   t_num		a;
   uintmax_t	value;
 
+  a.left = !flags.minus;
+  a.padding = flags.width;
+  a.precision = flags.precision;
+  a.alternate = flags.hash;
+  a.zero = flags.zero;
   split_type(flags.type, &a);
   if (a.type == 's')
     a.value = va_arg(arg, char*);
@@ -25,11 +30,6 @@ static t_num		flags2print(va_list arg, t_flags flags)
       value = va_arg(arg, uintmax_t);
       parse_value(&value, &a);
     }
-  a.left = !flags.minus;
-  a.padding = flags.width;
-  a.precision = flags.precision;
-  a.alternate = flags.hash;
-  a.zero = flags.zero;
   re_orga(&a);
   return (a);
 }
