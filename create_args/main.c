@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 18:53:49 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 11:33:18 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 16:00:56 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
   (void)argc;
   a = (t_num*)malloc(sizeof(*a));
   ft_bzero(a, sizeof(*a));
-  if (parse_value(val, argv[5] ? argv[5] : "d", a));
+  if (parse_value(val, a));
   {
     a->padding = argc > 2 ? atoi(argv[2]) : 0;
     a->precision = argc > 3 ? atoi(argv[3]) : 0;

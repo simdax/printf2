@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 12:08:59 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 16:07:32 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,41 @@ typedef union   u_tt
   long long	ll;
 }		t_tt;
 
-void	dereference(char type, va_list argument, void *val)
-{
-  t_tt tt;
+/* void	dereference(char type, va_list argument, void *val) */
+/* { */
+/*   t_tt tt; */
   
-  if ((ft_strany(type, "diDI")))
-    {
-      tt.i = va_arg(argument, int);
-      *(int*)val = tt.i;
-    }
-  else if ((ft_strany(type, "ouxOUX")))
-    {
-      tt.u = va_arg(argument, unsigned int);
-      *(unsigned int*)val = tt.u;
-    }
-  else if ((ft_strany(type, "l")))
-    {
-      tt.ll = va_arg(argument, long long);
-      *(unsigned long long*)val = tt.ll;
-    }
+/*   if ((ft_strany(type, "diDI"))) */
+/*     { */
+/*       tt.i = va_arg(argument, int); */
+/*       *(int*)val = tt.i; */
+/*     } */
+/*   else if ((ft_strany(type, "ouxOUX"))) */
+/*     { */
+/*       tt.u = va_arg(argument, unsigned int); */
+/*       *(unsigned int*)val = tt.u; */
+/*     } */
+/*   else if ((ft_strany(type, "l"))) */
+/*     { */
+/*       tt.ll = va_arg(argument, long long); */
+/*       *(unsigned long long*)val = tt.ll; */
+/*     } */
 
-}
+/* } */
 
 t_num	flags2print(va_list arg, t_flags flags)
 {
   t_num		a;
+  uintmax_t	value;
 
-  uintmax_t value = va_arg(arg, uintmax_t);
-  parse_value(&value, flags.type, &a);
+  split_type(flags.type, &a);
+  if (a.type == 's')
+    a.value = va_arg(arg, char*);
+  else
+    {
+      value = va_arg(arg, uintmax_t);
+      parse_value(&value, &a);
+    }
   a.left = flags.minus ? 0 : 1;
   a.padding = flags.width;
   a.precision = flags.precision;
@@ -84,7 +91,7 @@ static int		print(char **str, t_num *nums, int len)
     count += nums->count;	  
     ++nums;
   }
-  if (str)
+  if (str && *str)
     {
       ft_putstr(*str);
       count += ft_strlen(*str);
@@ -120,6 +127,6 @@ int			ft_printf(const char* str, ...)
     }
     va_end(arg);
   }
-  stock[count] = str;
+  stock[count] = (char*)str;
   return(print(stock, nums, nb_args));
 }
