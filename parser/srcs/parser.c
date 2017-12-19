@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 17:48:34 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/19 00:06:02 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 14:12:36 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,16 @@ static void	take_type(char **s, char *flags)
 
   i = 0;
   str = *s;
-  while (*str && (ft_strany(*str, MODIFIERS1) ||
-                  ft_strany(*str, MODIFIERS2) ||
-                  ft_strany(*str, TYPES)))
+  while (*str && i < 3 && (ft_strany(*str, MODIFIERS1) ||
+                           ft_strany(*str, MODIFIERS2) ||
+                           ft_strany(*str, TYPES)))
     {
-      if (i && (ft_strchr(TYPES, flags[i - 1]) ||
-                ft_strchr(MODIFIERS1, flags[i - 1])
-                ))
+      if (
+          (i && ft_strany(flags[i - 1], TYPES)) ||
+          (ft_strany(*str, MODIFIERS1) && i != 0) ||
+          (ft_strany(*str, MODIFIERS2) && i > 1 &&
+           !ft_strchr(flags[0], MODIFIERS2)))
         return ;
-      if (ft_strany(*str, MODIFIERS2))
-	{
-	  if (i == 1 && flags[i - 1] == flags[i])
-	    {
-	      flags[i] = *str;
-	      continue;
-	    }
-	  else if (i > 1)
-	    {
-	      *flags = 0;
-	      break;
-	    }
-	}
       flags[i] = *str;
       *s = ++str;
       ++i;
