@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 18:51:07 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 22:22:09 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,29 @@
 static t_num		flags2print(va_list arg, t_flags flags)
 {
   t_num		a;
-  uintmax_t	value;
+  intmax_t	value;
+  char		*string;
 
   a.left = !flags.minus;
   a.padding = flags.width;
   a.precision = flags.precision;
   a.alternate = flags.hash;
   a.zero = flags.zero;
+  a.sign = flags.plus;
+  a.space = flags.space;
   split_type(flags.type, &a);
   if (a.type == 's')
-    a.value = va_arg(arg, char*);
+    {
+      string = va_arg(arg, char*);
+      a.value = !string ? "(null)" : string;
+    }
   else
     {
-      value = va_arg(arg, uintmax_t);
+      value = va_arg(arg, intmax_t);
       parse_value(&value, &a);
     }
   re_orga(&a);
   return (a);
-}
-
-static int		count_percents(const char *str)
-{
-  int count;
-
-  count = 0;
-  while (*str) {
-    if (*str == '%')
-      count++;
-    str++;
-  }
-  return (count);
 }
 
 static int		print(char **str, t_num *nums, int len)
@@ -66,6 +59,19 @@ static int		print(char **str, t_num *nums, int len)
       ft_putstr(*str);
       count += ft_strlen(*str);
     }
+  return (count);
+}
+
+static int		count_percents(const char *str)
+{
+  int count;
+
+  count = 0;
+  while (*str) {
+    if (*str == '%')
+      count++;
+    str++;
+  }
   return (count);
 }
 

@@ -9,7 +9,7 @@ typedef struct		s_num
 {
   int    		sign;
   int    		alternate; // 0 1
-  //	void			(*print)(struct s_num*);
+  int			space;
   int    		base;	
   char			type;
   char			*modifiers;

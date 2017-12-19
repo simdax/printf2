@@ -6,13 +6,41 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 23:02:14 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/19 12:10:17 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 22:23:22 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_args.h"
 
-char	*m_itoa(long long val, int maj, int base)
+static char	*s_itoa(intmax_t val, int maj, t_num *a)
+{
+  char *res;
+  char *tmp;
+  int	i;
+
+  tmp = (char*)malloc(sizeof(char) * 65);
+  if (val < 0)
+      a->sign = -1;
+  val = val < 0 ? (uintmax_t)-val : val;
+  tmp[64] = '\0';
+  i = 63;
+  while (val >= a->base)
+    {
+      tmp[i] = maj ?
+        "0123456789ABCDEF"[val % a->base] :
+        "0123456789abcdef"[val % a->base];
+      val /= a->base;
+      i--;
+    }
+  tmp[i] = maj ?
+    "0123456789ABCDEF"[val % a->base] :
+    "0123456789abcdef"[val % a->base];
+  res = strdup(tmp + i);
+  free(tmp);
+  return (res);
+}
+
+static char	*u_itoa(uintmax_t val, int maj, t_num *a)
 {
   char *res;
   char *tmp;
@@ -21,49 +49,51 @@ char	*m_itoa(long long val, int maj, int base)
   tmp = (char*)malloc(sizeof(char) * 65);
   tmp[64] = '\0';
   i = 63;
-  while (val >= base)
+  while (val >= a->base)
     {
       tmp[i] = maj ?
-        "0123456789ABCDEF"[val % base] :
-        "0123456789abcdef"[val % base];
-      val /= base;
+        "0123456789ABCDEF"[val % a->base] :
+        "0123456789abcdef"[val % a->base];
+      val /= a->base;
       i--;
     }
   tmp[i] = maj ?
-    "0123456789ABCDEF"[val % base] :
-    "0123456789abcdef"[val % base];
+    "0123456789ABCDEF"[val % a->base] :
+    "0123456789abcdef"[val % a->base];
   res = strdup(tmp + i);
   free(tmp);
   return (res);
 }
 
-static char	*ret_val(char type, char *mods, void *val, int base)
+static char	*ret_val(t_num *a, void *val)
 {
-  if (type == '%')
+  if (a->type == '%')
     return ("%");
-  if (ft_strchr("diDI", type))
-    return (m_itoa(ft_strequ("h", mods) ? *(char*)val:
-                   ft_strequ("hh", mods) ? *(short*)val:
-                   ft_strequ("l", mods) ? *(long*)val:
-                   ft_strequ("ll", mods) ? *(long long*)val:
-                   ft_strequ("j", mods) ? *(ssize_t*)val:
-                   ft_strequ("z", mods) ? *(intmax_t*)val:
+  else if (a->type == 'c')
+    return (ft_strsub((char*)val, 0, 1));
+  else if (ft_strchr("diDI", a->type))
+    return (s_itoa(ft_strequ("hh", a->modifiers) ? *(char*)val:
+                   ft_strequ("h", a->modifiers) ? *(short*)val:
+                   ft_strequ("l", a->modifiers) ? *(long*)val:
+                   ft_strequ("ll", a->modifiers) ? *(long long*)val:
+                   ft_strequ("j", a->modifiers) ? *(intmax_t*)val:
+                   ft_strequ("z", a->modifiers) ? *(ssize_t*)val:
                    *(int*)val,
-                   (long)ft_strchr("DI", type), base));
-  else if (ft_strchr("ouxOUX", type))
-    return (m_itoa(ft_strequ("h", mods) ? *(unsigned char*)val:
-                   ft_strequ("hh", mods) ? *(unsigned short*)val:
-                   ft_strequ("l", mods) ? *(unsigned long*)val:
-                   ft_strequ("ll", mods) ? *(unsigned long long*)val:
-                   ft_strequ("j", mods) ? *(size_t*)val:
-                   ft_strequ("z", mods) ? *(uintmax_t*)val:
+                   (long)ft_strchr("DI", a->type), a));
+  else if (ft_strchr("ouxOUX", a->type))
+    return (u_itoa(ft_strequ("h", a->modifiers) ? *(unsigned char*)val:
+                   ft_strequ("hh", a->modifiers) ? *(unsigned short*)val:
+                   ft_strequ("l", a->modifiers) ? *(unsigned long*)val:
+                   ft_strequ("ll", a->modifiers) ? *(unsigned long long*)val:
+                   ft_strequ("j", a->modifiers) ? *(uintmax_t*)val:
+                   ft_strequ("z", a->modifiers) ? *(size_t*)val:
                    *(unsigned int*)val,
-                   (long)ft_strchr("OUX", type), base));
+                   (long)ft_strchr("OUX", a->type), a));
   else
     return (0);
 }
 
-static int	split_type(char *type, t_num *a)
+int		split_type(char *type, t_num *a)
 {
   if (type && ft_strlen(type) == 1)
     {
@@ -85,24 +115,42 @@ static int	split_type(char *type, t_num *a)
   return (1);
 }
 
-int	parse_value(void *value, char *type, t_num *a)
+int	parse_value(void *value, t_num *a)
 {
-  if (!split_type(type, a))
-    return (0);
   a->base =
     ft_strchr("oO", a->type) ? 8:
     ft_strchr("xX", a->type) ? 16:
     10;
-  if (value < 0)
-    a->sign = -1;
-  a->value = ret_val(a->type, a->modifiers, value, a->base);
-  a->str_len = ft_strlen(a->value);
-  a->count = a->str_len;
+  a->value = ret_val(a, value);
+  if (ft_strequ(a->value, "0") && a->precision == 0)
+    {
+      a->value = "";
+      a->alternate = 0;
+    }
   return (1);
 }
 
 void	re_orga(t_num *a)
 {
+  a->str_len = ft_strlen(a->value);
+  if (ft_strequ("0", a->value) && ft_strchr("xX", a->type))
+      a->alternate = 0;
+  if (a->alternate && ft_strchr("xX", a->type))
+      a->str_len += 2;
+  if (a->alternate && ft_strchr("oO", a->type))
+      a->str_len += 1;
+  if (a->type == 's')
+    {
+      a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
+        a->str_len : a->precision;
+      a->precision = 0;
+    }
+  a->count = a->str_len;
   a->precision = IF(a->precision - a->str_len);
   a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
+  if (a->zero && a->left)
+    {
+      a->precision = a->padding;
+      a->padding = 0;
+    }    
 }

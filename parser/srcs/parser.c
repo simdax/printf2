@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 17:48:34 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/19 14:12:36 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 15:30:46 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ static void	take_type(char **s, char *flags)
                            ft_strany(*str, MODIFIERS2) ||
                            ft_strany(*str, TYPES)))
     {
-      if (
-          (i && ft_strany(flags[i - 1], TYPES)) ||
-          (ft_strany(*str, MODIFIERS1) && i != 0) ||
-          (ft_strany(*str, MODIFIERS2) && i > 1 &&
-           !ft_strchr(flags[0], MODIFIERS2)))
+      if ((i && ft_strany(flags[i - 1], TYPES)) ||
+          (ft_strchr(MODIFIERS1, *str) && i != 0) ||
+          (ft_strchr(MODIFIERS2, *str) && i > 1 &&
+           !ft_strchr(MODIFIERS2, flags[0])))
         return ;
       flags[i] = *str;
       *s = ++str;
@@ -59,7 +58,7 @@ t_flags				parse(char *str)
   char		*cpy;
 
   cpy = str;
-  flags = (t_flags){0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  flags = (t_flags){0, 0, 0, 0, 0, 0, -1, 0, 0, 0};
   take_flags(&str, &flags);
   flags.width = ft_atoi(str);
   str += flags.width ? ft_nbrsize(flags.width) : 0;

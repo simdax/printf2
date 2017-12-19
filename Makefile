@@ -29,8 +29,8 @@ $(NAME): $(OBJ) #modules
 
 alllibs:
 	make -C libft
-	make -C parser lib &
-	make -C create_args lib
+	make -C parser re
+	make -C create_args re
 
 modules:
 	ar crsT modules.a $(MODULES)
@@ -51,14 +51,14 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo -e  "\033[0;31m [✗] \033[0m \033[0;33m Removed last build: \033[0m " $(NAME)
 
-re:
+re:	alllibs
 	@$(MAKE) fclean
 	@$(MAKE) all
 
 debug: all
 	lldb $(NAME)
 
-test: all
+test: re
 	@$(CC) -g tests/main.c libft$(NAME).a -o $(NAME)
 	@cd tests && ./main
 
