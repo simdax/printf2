@@ -1,7 +1,7 @@
 #  ╓─────[ Target and vars ]─  
 #  ╙───────────────────── ─ ─ 
 NAME := parser
-COMMIT_MSG := "tests OK"
+COMMIT_MSG := "tests $(NAME) OK"
 
 #  ╓─────[ Compiler ]─  
 #  ╙───────────────────── ─ ─ 

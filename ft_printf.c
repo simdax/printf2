@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 10:25:27 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 12:08:59 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ typedef union   u_tt
 {
   int		i;
   unsigned int 	u;
+  long		l;
+  long long	ll;
 }		t_tt;
 
 void	dereference(char type, va_list argument, void *val)
@@ -32,28 +34,26 @@ void	dereference(char type, va_list argument, void *val)
       tt.u = va_arg(argument, unsigned int);
       *(unsigned int*)val = tt.u;
     }
+  else if ((ft_strany(type, "l")))
+    {
+      tt.ll = va_arg(argument, long long);
+      *(unsigned long long*)val = tt.ll;
+    }
+
 }
 
 t_num	flags2print(va_list arg, t_flags flags)
 {
   t_num		a;
-  void		*value;
 
-  value = malloc(32);
-  dereference('d', arg, value);
-  //  value = va_arg(arg, long long);
-  parse_value(value, flags.type, &a);
+  uintmax_t value = va_arg(arg, uintmax_t);
+  parse_value(&value, flags.type, &a);
   a.left = flags.minus ? 0 : 1;
-  a.sign = value > 0;
   a.padding = flags.width;
   a.precision = flags.precision;
   a.alternate = flags.hash;
-  a.zero = flags.zero;// && !ft_strchr("DIOUXdioux", a.type) ? '0' : ' ';
-  a.precision = IF(a.precision - a.str_len);
-  a.padding = IF(ABS(a.padding) - a.str_len - a.precision);
-  //  print_arg(&a);
-  //  free(a.value);
-  // free(value);
+  a.zero = flags.zero;
+  re_orga(&a);
   return (a);
 }
 
