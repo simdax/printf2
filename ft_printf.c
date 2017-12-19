@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/18 23:40:41 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 10:25:27 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_num	flags2print(va_list arg, t_flags flags)
   a.padding = flags.width;
   a.precision = flags.precision;
   a.alternate = flags.hash;
-  a.type_padding = flags.zero && !ft_strchr("DIOUXdioux", a.type) ? '0' : ' ';
+  a.zero = flags.zero;// && !ft_strchr("DIOUXdioux", a.type) ? '0' : ' ';
   a.precision = IF(a.precision - a.str_len);
   a.padding = IF(ABS(a.padding) - a.str_len - a.precision);
   //  print_arg(&a);
