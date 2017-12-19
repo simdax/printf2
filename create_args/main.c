@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 18:53:49 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 00:17:34 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 11:33:18 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_flags(char *str, t_num *a)
       if (*str == '+')
 	a->sign = 1;
       if (*str == '-')
-	a->left = -1;
+	a->left = 0;
       ++str;
     }
 }
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
   t_num		*a;
   void		*val;
 
-  int b = atoi(argv[1]);
+  int b = atoll(argv[1]);
   val = &b;
   (void)argc;
   a = (t_num*)malloc(sizeof(*a));

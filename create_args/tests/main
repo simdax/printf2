@@ -10,7 +10,7 @@ space=(' ' "0")
 alternate=("#" "0")
 zero=("0" "0")
 #types
-types=(d i o u x ld li lo lu lx lld lli llo llu llx)
+types=(d i o u ) # x ld li lo lu lx lld lli llo llu llx)
 
 for value in ${values[@]}; do
     for w in ${width[@]}; do
@@ -18,7 +18,6 @@ for value in ${values[@]}; do
 	    for min in ${minus[@]}; do
 		for pl in ${plus[@]}; do
 		    for zero in ${zero[@]}; do
-                        echo $zero
 			for alt in ${alternate[@]}; do
 				for typ in ${types[@]}; do
 				    ./test $value $w $prec $typ $zero $min $pl $sp $alt

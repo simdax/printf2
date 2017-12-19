@@ -6,13 +6,13 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 23:02:14 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/19 00:13:23 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/19 12:10:17 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_args.h"
 
-char	*m_itoa(long long val, int base, int maj)
+char	*m_itoa(long long val, int maj, int base)
 {
   char *res;
   char *tmp;
@@ -37,14 +37,30 @@ char	*m_itoa(long long val, int base, int maj)
   return (res);
 }
 
-static char	*ret_val(char type, void *val, int base)
+static char	*ret_val(char type, char *mods, void *val, int base)
 {
   if (type == '%')
     return ("%");
-  return (m_itoa(ft_strchr("diDI", type) ? *(int*)val:
-		 ft_strchr("ouxOUX", type) ? *(unsigned int*)val
-                 : 0,
-                 base, (long)ft_strchr("DIOUX", type)));	
+  if (ft_strchr("diDI", type))
+    return (m_itoa(ft_strequ("h", mods) ? *(char*)val:
+                   ft_strequ("hh", mods) ? *(short*)val:
+                   ft_strequ("l", mods) ? *(long*)val:
+                   ft_strequ("ll", mods) ? *(long long*)val:
+                   ft_strequ("j", mods) ? *(ssize_t*)val:
+                   ft_strequ("z", mods) ? *(intmax_t*)val:
+                   *(int*)val,
+                   (long)ft_strchr("DI", type), base));
+  else if (ft_strchr("ouxOUX", type))
+    return (m_itoa(ft_strequ("h", mods) ? *(unsigned char*)val:
+                   ft_strequ("hh", mods) ? *(unsigned short*)val:
+                   ft_strequ("l", mods) ? *(unsigned long*)val:
+                   ft_strequ("ll", mods) ? *(unsigned long long*)val:
+                   ft_strequ("j", mods) ? *(size_t*)val:
+                   ft_strequ("z", mods) ? *(uintmax_t*)val:
+                   *(unsigned int*)val,
+                   (long)ft_strchr("OUX", type), base));
+  else
+    return (0);
 }
 
 static int	split_type(char *type, t_num *a)
@@ -56,7 +72,7 @@ static int	split_type(char *type, t_num *a)
     }
   else if (type && (ft_strlen(type) == 2))
     {
-      a->modifiers = &(type[0]);
+      a->modifiers = ft_strsub(type, 0, 1);
       a->type = type[1];
     }
   else if (type && (ft_strlen(type) == 3))
@@ -77,7 +93,9 @@ int	parse_value(void *value, char *type, t_num *a)
     ft_strchr("oO", a->type) ? 8:
     ft_strchr("xX", a->type) ? 16:
     10;
-  a->value = ret_val(a->type, value, a->base);
+  if (value < 0)
+    a->sign = -1;
+  a->value = ret_val(a->type, a->modifiers, value, a->base);
   a->str_len = ft_strlen(a->value);
   a->count = a->str_len;
   return (1);
