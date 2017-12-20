@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:27:21 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/19 22:22:09 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/20 12:23:38 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static t_num		flags2print(va_list arg, t_flags flags)
   a.sign = flags.plus;
   a.space = flags.space;
   split_type(flags.type, &a);
+  if (ft_strchr("diouxDIOUX", a.type) && a.precision > 0)
+    a.zero = 0;
+  if (a.type == 'c')
+    {
+      a.precision = 0;
+      a.space = 0;
+    }
   if (a.type == 's')
     {
       string = va_arg(arg, char*);

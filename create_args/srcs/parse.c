@@ -6,7 +6,7 @@
 /*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 23:02:14 by simdax            #+#    #+#             */
-/*   Updated: 2017/12/19 22:23:22 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/20 12:19:49 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*s_itoa(intmax_t val, int maj, t_num *a)
 
   tmp = (char*)malloc(sizeof(char) * 65);
   if (val < 0)
-      a->sign = -1;
+    a->sign = -1;
   val = val < 0 ? (uintmax_t)-val : val;
   tmp[64] = '\0';
   i = 63;
@@ -65,32 +65,30 @@ static char	*u_itoa(uintmax_t val, int maj, t_num *a)
   return (res);
 }
 
-static char	*ret_val(t_num *a, void *val)
+static void	ret_val(t_num *a, void *val)
 {
   if (a->type == '%')
-    return ("%");
-  else if (a->type == 'c')
-    return (ft_strsub((char*)val, 0, 1));
+    a->value = "%";
   else if (ft_strchr("diDI", a->type))
-    return (s_itoa(ft_strequ("hh", a->modifiers) ? *(char*)val:
-                   ft_strequ("h", a->modifiers) ? *(short*)val:
-                   ft_strequ("l", a->modifiers) ? *(long*)val:
-                   ft_strequ("ll", a->modifiers) ? *(long long*)val:
-                   ft_strequ("j", a->modifiers) ? *(intmax_t*)val:
-                   ft_strequ("z", a->modifiers) ? *(ssize_t*)val:
-                   *(int*)val,
-                   (long)ft_strchr("DI", a->type), a));
+    a->value = s_itoa(ft_strequ("hh", a->modifiers) ? *(char*)val:
+                      ft_strequ("h", a->modifiers) ? *(short*)val:
+                      ft_strequ("l", a->modifiers) ? *(long*)val:
+                      ft_strequ("ll", a->modifiers) ? *(long long*)val:
+                      ft_strequ("j", a->modifiers) ? *(intmax_t*)val:
+                      ft_strequ("z", a->modifiers) ? *(ssize_t*)val:
+                      *(int*)val,
+                      (long)ft_strchr("DI", a->type), a);
   else if (ft_strchr("ouxOUX", a->type))
-    return (u_itoa(ft_strequ("h", a->modifiers) ? *(unsigned char*)val:
-                   ft_strequ("hh", a->modifiers) ? *(unsigned short*)val:
-                   ft_strequ("l", a->modifiers) ? *(unsigned long*)val:
-                   ft_strequ("ll", a->modifiers) ? *(unsigned long long*)val:
-                   ft_strequ("j", a->modifiers) ? *(uintmax_t*)val:
-                   ft_strequ("z", a->modifiers) ? *(size_t*)val:
-                   *(unsigned int*)val,
-                   (long)ft_strchr("OUX", a->type), a));
+    a->value = u_itoa(ft_strequ("h", a->modifiers) ? *(unsigned char*)val:
+                      ft_strequ("hh", a->modifiers) ? *(unsigned short*)val:
+                      ft_strequ("l", a->modifiers) ? *(unsigned long*)val:
+                      ft_strequ("ll", a->modifiers) ? *(unsigned long long*)val:
+                      ft_strequ("j", a->modifiers) ? *(uintmax_t*)val:
+                      ft_strequ("z", a->modifiers) ? *(size_t*)val:
+                      *(unsigned int*)val,
+                      (long)ft_strchr("OUX", a->type), a);
   else
-    return (0);
+    a->value = *(int*)val;
 }
 
 int		split_type(char *type, t_num *a)
@@ -121,8 +119,9 @@ int	parse_value(void *value, t_num *a)
     ft_strchr("oO", a->type) ? 8:
     ft_strchr("xX", a->type) ? 16:
     10;
-  a->value = ret_val(a, value);
-  if (ft_strequ(a->value, "0") && a->precision == 0)
+  ret_val(a, value);
+  if (a->type != 'c' && ft_strequ(a->value, "0")
+      /* && ft_strchr("xX", a->type) */ && a->precision == 0)
     {
       a->value = "";
       a->alternate = 0;
@@ -132,13 +131,11 @@ int	parse_value(void *value, t_num *a)
 
 void	re_orga(t_num *a)
 {
-  a->str_len = ft_strlen(a->value);
-  if (ft_strequ("0", a->value) && ft_strchr("xX", a->type))
-      a->alternate = 0;
+  a->str_len = a->type == 'c' ? 1 : ft_strlen(a->value);
+  if (a->type != 'c' && ft_strequ("0", a->value) && ft_strchr("xX", a->type))
+    a->alternate = 0;
   if (a->alternate && ft_strchr("xX", a->type))
-      a->str_len += 2;
-  if (a->alternate && ft_strchr("oO", a->type))
-      a->str_len += 1;
+    a->str_len += 2;
   if (a->type == 's')
     {
       a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
@@ -147,6 +144,10 @@ void	re_orga(t_num *a)
     }
   a->count = a->str_len;
   a->precision = IF(a->precision - a->str_len);
+  if (a->alternate && ft_strchr("oO", a->type))
+    ++a->precision;
+  if (a->sign != 0 || a->space)
+    ++a->str_len;
   a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
   if (a->zero && a->left)
     {

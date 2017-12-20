@@ -6,7 +6,7 @@
 //   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2017/11/27 19:30:47 by scornaz           #+#    #+#             //
-/*   Updated: 2017/12/19 22:15:04 by simdax           ###   ########.fr       */
+/*   Updated: 2017/12/20 12:10:31 by simdax           ###   ########.fr       */
 //                                                                            //
 // ************************************************************************* //
 
@@ -25,6 +25,8 @@ void	print_arg(t_num *num)
     print_padding(num->precision, '0', &num->count);
     if (num->type == 's')
       write(1, num->value, num->str_len);
+    else if (num->type == 'c')
+        write(1, &num->value, 1);
     else
       ft_putstr(num->value);
     if (!num->left)
@@ -34,9 +36,7 @@ void	print_arg(t_num *num)
 
 void	print_alternate(t_num *num)
 {
-  if (ft_strchr("oO", num->type))
-    num->precision += 1;
-  else if (num->type == 'X')
+  if (num->type == 'X')
     write(1, "0X", 2);
   else if (num->type == 'x')
     write(1, "0x", 2);
