@@ -33,14 +33,16 @@ int		main(int argc, char **argv)
   /* print("coucou %ld et %lx", 4294967296, 4294967296); */
   /* print("%#x", 20, 20); */
   // print("%jx", -4294967296, 20);
+  //print("%jd", -4294967296, 20);
   /* print("%#x", 0, 0); */
   /* print("%-#08x", 42, 0); */
   /* print("%#08x", 42, 0); */
   /* print("%0#.x", 0, 0); */
   /* print2("%s", "coucou"); */
   //  print2("%.2s is a string and a char %c", "", 0);
-  print2("%.2s is a string and a char %5c tec", "", 42);
-  //  print("%jx", -9223372036854775808, 0);
+  //  print2("%.2s is a string and a char %5c tec", "", 42);
+  //  print("%#.0", 
+  print("%jd", -9223372036854775808, 0);
   return (0);
 }
 

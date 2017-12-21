@@ -1,0 +1,40 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/12/20 15:57:09 by simdax            #+#    #+#              #
+#    Updated: 2017/12/20 17:38:59 by simdax           ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+NAME := libftprintf.a
+SRCS :=	flags.c parse.c print.c main.c
+OBJS := $(SRCS:.c=.o)
+LD := libft/libft.a
+INC := $(addprefix -I, libft)
+FLAGS := $(INC) $(LD)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo `tput setaf 4`ALLEZ ON LINK TOUT !!!!	
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+
+%.o : %.c
+	@echo `tput setaf 3`ALLEZ ON COMPILE $@ !!!!	
+	@gcc -c $(INC) $< -o $@ 
+
+clean:
+	@echo `tput setaf 1`ALLEZ ON CASSE TOUT !!!!
+	@rm -rf $(OBJS)
+
+fclean: clean
+	@echo `tput setaf 5`ALLEZ ON CASSE LE BIN !!!!
+	@rm -rf $(NAME)
+
+re: fclean all
+	@echo `tput setaf 2`BRAVO LE REBUILD !!!!
