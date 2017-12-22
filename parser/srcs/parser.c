@@ -46,13 +46,16 @@ static void	take_type(char **s, char *flags)
           (ft_strchr(MODIFIERS2, *str) && i > 1 &&
            !ft_strchr(MODIFIERS2, flags[0])))
         {
-          flags[i] = 'E';
+          if (!ft_strchr(TYPES, flags[i - 1]))
+            flags[i] = 'E';
           return ;
         } 
       flags[i] = *str;
       *s = ++str;
       ++i;
     }
+  if (!i || !ft_strchr(TYPES, flags[i - 1]))
+    flags[i] = 'E';
 }
 
 t_flags				parse(char *str)
@@ -61,7 +64,7 @@ t_flags				parse(char *str)
   char		*cpy;
 
   cpy = str;
-  flags = (t_flags){0, 0, 0, 0, 0, 0, -1, 0, 0, 0};
+  flags = (t_flags){0, 0, 0, 0, 0, 0, -1, 0, "E", 0};
   take_flags(&str, &flags);
   flags.width = ft_atoi(str);
   str += flags.width ? ft_nbrsize(flags.width) : 0;
