@@ -24,7 +24,7 @@ static void	take_flags(char **s, t_flags *flags)
       SET(flags->minus, '-', *str);
       SET(flags->space, ' ', *str);
       SET(flags->apostrophe, 39, *str);
-      if (!ft_strany(*str, "0#+- '"))
+      if (!ft_strchr("0#+- '", *str))
         break;
       *s = ++str;
     }
@@ -45,7 +45,10 @@ static void	take_type(char **s, char *flags)
           (ft_strchr(MODIFIERS1, *str) && i != 0) ||
           (ft_strchr(MODIFIERS2, *str) && i > 1 &&
            !ft_strchr(MODIFIERS2, flags[0])))
-        return ;
+        {
+          flags[i] = 'E';
+          return ;
+        } 
       flags[i] = *str;
       *s = ++str;
       ++i;
