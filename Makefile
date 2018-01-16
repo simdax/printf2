@@ -65,6 +65,9 @@ test: re
 lib:
 	@make -C $(LIBFT)
 
+b:
+	./prod
+
 #  ╓─────[ Call me maybe ]─  
 #  ╙───────────────────── ─ ─ 
 .PHONY: all lib clean fclean re
