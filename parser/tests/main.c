@@ -2,6 +2,7 @@
 
 void print_struct(t_flags t)
 {
+	printf("%d", t.star);
     printf("%d", t.zero);
     printf("%d", t.plus);	
     printf("%d", t.hash);	

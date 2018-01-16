@@ -12,7 +12,7 @@ LDFLAGS := ../libft/libft.a
 #────[ Functions ]─  
 #  ╙───────────────────── ─ ─
 
-SRC := main.c parser.c 
+SRC := tests/main.c parser.c 
 INC := $(addprefix -I, includes ../libft)
 OBJ := $(SRC:.c=.o)
 LIB_OBJ = $(filter-out main.o, $(OBJ))	

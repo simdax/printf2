@@ -1,21 +1,21 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/09 14:27:19 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/18 23:57:53 by simdax           ###   ########.fr       */
-/*                                                                            */
+/*																			  */
+/*														  :::	   ::::::::	  */
+/*	 parser.h											:+:		 :+:	:+:	  */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2017/12/09 14:27:19 by scornaz		   #+#	  #+#			  */
+/*   Updated: 2018/01/16 16:45:47 by scornaz          ###   ########.fr       */
+/*																			  */
 /* ************************************************************************** */
-
 
 #ifndef PARSER_H
 # define PARSER_H
 
 typedef struct	s_flags
 {
+	int			star;
 	int			zero;
 	int			plus;
 	int			hash;
@@ -23,16 +23,15 @@ typedef struct	s_flags
 	int			apostrophe;
 	int			space;
 	int			precision;
-    	int			width;
-  	char			type[3];
-  	int			count;
+	int			width;
+	char		type[3];
+	int			count;
 }				t_flags;
 
-# define SET(x,c,s)	x = x || s == c
+# define FLAGS		"0#+- '*"
 # define TYPES		"scdiouxSCDIOUX%"
 # define MODIFIERS2	"hl"
 # define MODIFIERS1	"jz"
-//# define REPS		1
 
 # include <stdio.h>
 # include "libft.h"
