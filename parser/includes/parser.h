@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/12/09 14:27:19 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/16 16:45:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/16 19:08:31 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef struct	s_flags
 
 # include <stdio.h>
 # include "libft.h"
-# include "prototypes.h"
+# include "prototypes_par.h"
 
 #endif
