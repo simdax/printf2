@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/11/24 14:27:21 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 12:19:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 14:08:24 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int		print(char **str, t_num *nums, int len, const char *last)
 	while (len--) {
 		ft_putstr(*str);
 		count += ft_strlen(*str);
+		free(*str);
 		++str;
 		print_arg(nums);
 		count += nums->count;
@@ -79,6 +80,7 @@ static int		print(char **str, t_num *nums, int len, const char *last)
 		if (*str != last)
 			free(*str);
 	}
+	free(cpy);
 	free(cpy_nums); 
 	return (count);
 }
