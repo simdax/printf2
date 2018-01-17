@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/11/24 14:27:21 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/16 17:05:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 11:59:21 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -53,25 +53,31 @@ static t_num		flags2print(va_list arg, t_flags flags)
 	return (a);
 }
 
-static int		print(char **str, t_num *nums, int len)
+static int		print(char **str, t_num *nums, int len, char *last)
 {
-	int	count;
-	char	*cpy;
+	int		count;
+	char	**cpy;
+	t_num	*cpy_nums;
 
+	cpy = str;
+	cpy_nums = nums;
 	count = 0;
 	while (len--) {
 		ft_putstr(*str);
 		count += ft_strlen(*str);
 		++str;
 		print_arg(nums);
-		count += nums->count;	  
+		count += nums->count;
 		++nums;
 	}
 	if (str && *str)
 	{
 		ft_putstr(*str);
 		count += ft_strlen(*str);
+		if (*str != last)
+			free(*str);
 	}
+	free(cpy_nums); 
 	return (count);
 }
 
@@ -90,13 +96,13 @@ static int		count_percents(const char *str)
 
 int			ft_printf(const char* str, ...)
 {
-	va_list	arg;
-	int		nb_args;
+	va_list		arg;
+	int			nb_args;
 	char		*cpy;
 	char		**stock;
 	t_num		*nums;
-	t_flags	flags;
-	int		count;
+	t_flags		flags;
+	int			count;
 
 	count = 0;
 	nb_args = count_percents(str);
@@ -119,5 +125,5 @@ int			ft_printf(const char* str, ...)
 		va_end(arg);
 	}
 	stock[count] = (char*)str;
-	return(print(stock, nums, nb_args));
+	return (print(stock, nums, nb_args, str));
 }

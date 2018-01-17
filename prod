@@ -21,9 +21,9 @@ done
 cat <<end > build/Makefile 
 NAME := libftprintf.a
 SRCS := $(echo $(basename $cs))
-LIBFT_SRCS := libft/*.o
+LIBFT_SRCS := ../../*.o
 OBJS := \$(SRCS:.c=.o)
-INC := \$(addprefix -I, libft includes)
+INC := \$(addprefix -I, ../.. includes)
 
 all: \$(NAME)
 
