@@ -66,7 +66,7 @@ lib:
 	@make -C $(LIBFT)
 
 b:
-	./prod && make -C build
+	./prod && make -C build re
 
 #  ╓─────[ Call me maybe ]─  
 #  ╙───────────────────── ─ ─ 
