@@ -1,0 +1,45 @@
+#!/bin/sh
+
+rm -rf build/ft_printf.h
+rm -rf build/*.c
+mkdir -p build/includes
+cp -r libft build
+
+hs=`find . -name "*.h" | grep -v libft | grep -v build`
+cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v main.c`
+
+for h in $hs; do
+	echo $h
+	cp $h build/includes
+done
+
+for c in $cs; do
+	echo $c
+	cp $c build
+done
+
+cat <<end > build/Makefile 
+NAME := libftprintf.a
+SRCS := $(echo $(basename $cs))
+LIBFT_SRCS := libft/*.o
+OBJS := \$(SRCS:.c=.o)
+INC := \$(addprefix -I, libft includes)
+
+all: \$(NAME)
+
+\$(NAME): \$(OBJS)
+	@ar cr \$(NAME) \$(OBJS) \$(LIBFT_SRCS)
+	@ranlib \$(NAME)
+
+%.o : %.c
+	@gcc -c \$(INC) \$< -o \$@
+
+clean:
+	@rm -rf \$(OBJS)
+
+fclean: clean
+	@rm -rf \$(NAME)
+
+re: fclean all
+
+end
