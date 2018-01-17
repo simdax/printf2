@@ -58,8 +58,8 @@ re:	alllibs
 debug: all
 	lldb $(NAME)
 
-test: re
-	@$(CC) -g tests/main.c libft$(NAME).a -o $(NAME)
+test: b
+	@$(CC) -g tests/main.c build/libft$(NAME).a -o $(NAME)
 	@cd tests && ./main
 
 lib:
