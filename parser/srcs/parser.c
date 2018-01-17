@@ -1,26 +1,27 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::	  */
-/*	 parser.c											:+:		 :+:	:+:	  */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2018/01/17 17:42:56 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 17:45:34 by scornaz          ###   ########.fr       */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
+/*   Updated: 2018/01/17 17:52:58 by scornaz          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void set(int *flag, char c1, char c2)
+static void	set(int *flag, char c1, char c2)
 {
 	*flag = *flag || c1 == c2;
 }
 
 static void	take_flags(char **s, t_flags *flags)
 {
-	char		*str = *s;
+	char		*str;
 
+	str = *s;
 	while (*str)
 	{
 		set(&flags->star, '*', *str);
@@ -31,7 +32,7 @@ static void	take_flags(char **s, t_flags *flags)
 		set(&flags->space, ' ', *str);
 		set(&flags->apostrophe, 39, *str);
 		if (!ft_strchr(FLAGS, *str))
-			break;
+			break ;
 		*s = ++str;
 	}
 }
@@ -39,7 +40,7 @@ static void	take_flags(char **s, t_flags *flags)
 static void	take_type(char **s, char *flags)
 {
 	char	*str;
-	int	i;
+	int		i;
 
 	i = 0;
 	str = *s;
@@ -64,9 +65,9 @@ static void	take_type(char **s, char *flags)
 		flags[i] = 'E';
 }
 
-t_flags				parse(char *str)
+t_flags		parse(char *str)
 {
-	t_flags	flags;
+	t_flags		flags;
 	char		*cpy;
 
 	cpy = str;
@@ -80,9 +81,8 @@ t_flags				parse(char *str)
 		flags.precision = ft_atoi(str);
 		if (flags.precision)
 			str += ft_nbrsize(flags.precision);
-		else
-			if (str[0] == '0')
-				++str;
+		else if (str[0] == '0')
+			++str;
 	}
 	if (*str)
 		take_type(&str, flags.type);

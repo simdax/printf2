@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2018/01/17 17:14:46 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 17:49:41 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 17:59:42 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -53,6 +53,22 @@ int		parse_value(void *value, t_num *a)
 	return (1);
 }
 
+void	re_orga2(t_num *a)
+{
+	if (ft_strchr("diouxDIOUX", a->type) && a->precision > 0)
+		a->zero = 0;
+	if (ft_strchr("ouxOUX", a->type))
+	{
+		a->sign = 0;
+		a->space = 0;
+	}
+	if (a->type == 'c')
+	{
+		a->precision = 0;
+		a->space = 0;
+	}
+}
+
 void	re_orga(t_num *a)
 {
 	a->str_len = a->type == 'c' ? 1 : ft_strlen(a->value);
@@ -70,7 +86,7 @@ void	re_orga(t_num *a)
 	a->precision = IF(a->precision - a->str_len);
 	if (a->alternate && ft_strchr("oO", a->type))
 		++a->precision;
-	iF (a->sign != 0 || a->space)
+	if (a->sign != 0 || a->space)
 		++a->str_len;
 	a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
 	if (a->zero && a->left)

@@ -6,11 +6,23 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/11/24 14:27:21 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 14:08:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 18:05:45 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+static void	hydrate(t_num *a, t_flags *flags)
+{
+	a->left = !flags->minus;
+	a->star = flags->star;
+	a->padding = flags->width;
+	a->precision = flags->precision;
+	a->alternate = flags->hash;
+	a->zero = flags->zero;
+	a->sign = flags->plus;
+	a->space = flags->space;
+}
 
 static t_num		flags2print(va_list arg, t_flags flags)
 {
@@ -18,27 +30,9 @@ static t_num		flags2print(va_list arg, t_flags flags)
 	intmax_t	value;
 	char		*string;
 
-	a.left = !flags.minus;
-	a.star = flags.star;
-	a.padding = flags.width;
-	a.precision = flags.precision;
-	a.alternate = flags.hash;
-	a.zero = flags.zero;
-	a.sign = flags.plus;
-	a.space = flags.space;
+	hydrate(&a, &flags);
 	split_type(flags.type, &a);
-	if (ft_strchr("diouxDIOUX", a.type) && a.precision > 0)
-		a.zero = 0;
-	if (ft_strchr("ouxOUX", a.type))
-	{
-		a.sign = 0;
-		a.space = 0;
-	}
-	if (a.type == 'c')
-	{
-		a.precision = 0;
-		a.space = 0;
-	}
+	re_orga2(&a);
 	if (a.type == 's')
 	{
 		string = va_arg(arg, char*);
@@ -98,36 +92,40 @@ static int		count_percents(const char *str)
 	return (count);
 }
 
-int			ft_printf(const char* str, ...)
-{
-	va_list		arg;
+typedef struct args {
 	int			nb_args;
 	char		*cpy;
 	char		**stock;
 	t_num		*nums;
 	t_flags		flags;
-	int			count;
+	int			count;	
+};
 
-	count = 0;
-	nb_args = count_percents(str);
-	nums = (t_num*)malloc(sizeof(t_num) * (nb_args + 1));
-	stock = (char**)malloc(sizeof(char*) * (nb_args + 2));
-	if (nb_args){
+int			ft_printf(const char* str, ...)
+{
+	va_list		arg;
+	args		args;
+	
+	args.count = 0;
+	args.nb_args = count_percents(str);
+	args.nums = (t_num*)malloc(sizeof(t_num) * (args.nb_args + 1));
+	args.stock = (char**)malloc(sizeof(char*) * (args.nb_args + 2));
+	if (args.nb_args){
 		va_start(arg, str);
-		while (count < nb_args) {
-			cpy = ft_strchr(str, '%');
-			stock[count] = ft_strsub(str, 0, cpy - str);
-			flags = parse(cpy + 1);
-			if (flags.star)
-				flags.width = va_arg(arg, int);
-			nums[count] = flags2print(arg, flags);
-			if (cpy[flags.count] == '%')
-				--nb_args;
-			str = cpy + flags.count + 1;
-			++count;
+		while (args.count < args.nb_args) {
+			args.cpy = ft_strchr(str, '%');
+			args.stock[args.count] = ft_strsub(str, 0, args.cpy - str);
+			args.flags = parse(args.cpy + 1);
+			if (args.flags.star)
+				args.flags.width = va_arg(arg, int);
+			args.nums[args.count] = flags2print(arg, args.flags);
+			if (args.cpy[args.flags.count] == '%')
+				--args.nb_args;
+			str = args.cpy + args.flags.count + 1;
+			++args.count;
 		}
 		va_end(arg);
 	}
-	stock[count] = (char*)str;
-	return (print(stock, nums, nb_args, str));
+	args.stock[args.count] = (char*)str;
+	return (print(args.stock, args.nums, args.nb_args, str));
 }
