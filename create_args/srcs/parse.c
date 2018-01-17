@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2018/01/17 17:14:46 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 17:16:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 17:49:41 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ int		split_type(char *type, t_num *a)
 	return (1);
 }
 
-int	parse_value(void *value, t_num *a)
+int		parse_value(void *value, t_num *a)
 {
-	a->base =
-		ft_strchr("oO", a->type) ? 8:
-		ft_strchr("xX", a->type) ? 16:
-		10;
+	if (ft_strchr("oO", a->type))
+		a->base = 8;
+	if (ft_strchr("xX", a->type))
+		a->base = 16;
+	else
+		a->base = 10;
 	ret_val(a, value);
 	if (a->type != 'c' && ft_strequ(a->value, "0")
 		&& a->precision == 0)
@@ -68,12 +70,12 @@ void	re_orga(t_num *a)
 	a->precision = IF(a->precision - a->str_len);
 	if (a->alternate && ft_strchr("oO", a->type))
 		++a->precision;
-	if (a->sign != 0 || a->space)
+	iF (a->sign != 0 || a->space)
 		++a->str_len;
 	a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
 	if (a->zero && a->left)
 	{
 		a->precision = a->padding;
 		a->padding = 0;
-	}	 
+	}
 }

@@ -1,14 +1,14 @@
-// ************************************************************************** //
-//																			  //
-//														  :::	   ::::::::	  //
-//	 print.cc											:+:		 :+:	:+:	  //
-//													  +:+ +:+		  +:+	  //
-//	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  //
-//												  +#+#+#+#+#+	+#+			  //
-//	 Created: 2017/11/27 19:30:47 by scornaz		   #+#	  #+#			  //
-/*   Updated: 2018/01/17 17:15:18 by scornaz          ###   ########.fr       */
-//																			  //
-// ************************************************************************* //
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
+/*   Updated: 2018/01/17 17:42:34 by scornaz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "create_args.h"
 
@@ -16,7 +16,8 @@ void	print_arg(t_num *num)
 {
 	if (num->type == '%')
 		write(1, "%", 1);
-	else {
+	else
+	{
 		if (num->left)
 			print_padding(num->padding, num->zero ? '0' : ' ', &num->count);
 		if (num->alternate)
@@ -44,7 +45,8 @@ void	print_alternate(t_num *num)
 
 void	print_padding(size_t count, char with, size_t *c)
 {
-	while (count) {
+	while (count)
+	{
 		ft_putchar(with);
 		*c += 1;
 		--count;
