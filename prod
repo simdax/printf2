@@ -32,7 +32,7 @@ all: \$(NAME)
 	@ranlib \$(NAME)
 
 %.o : %.c
-	@gcc -c \$(INC) \$< -o \$@
+	@gcc -c -g \$(INC) \$< -o \$@
 
 clean:
 	@rm -rf \$(OBJS)

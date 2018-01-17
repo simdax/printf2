@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/11/24 14:27:21 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 11:59:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/17 12:19:09 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_num		flags2print(va_list arg, t_flags flags)
 	return (a);
 }
 
-static int		print(char **str, t_num *nums, int len, char *last)
+static int		print(char **str, t_num *nums, int len, const char *last)
 {
 	int		count;
 	char	**cpy;
@@ -68,6 +68,8 @@ static int		print(char **str, t_num *nums, int len, char *last)
 		++str;
 		print_arg(nums);
 		count += nums->count;
+		if (!ft_strchr("sScC", nums->type))
+			free(nums->value);
 		++nums;
 	}
 	if (str && *str)

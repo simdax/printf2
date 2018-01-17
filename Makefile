@@ -13,8 +13,8 @@ LDFLAGS = modules.a
 #  ╓─────[ Functions ]─  
 #  ╙───────────────────── ─ ─
 
-SRC = ft_printf.c
-INC = $(addprefix -I, libft includes create_args/includes parser/includes)
+SRC = ft_printf.c create_args/srcs/*.c parser/srcs/*.c
+INC = $(addprefix -I, .. libft includes create_args/includes parser/includes)
 OBJ = $(SRC:.c=.o)
 
 vpath %.c srcs/
@@ -55,12 +55,12 @@ re:	alllibs
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-debug: all
-	lldb $(NAME)
+debug: b
+	lldb tests/$(NAME)
 
 test: b
-	@$(CC) -g tests/main.c build/libft$(NAME).a -o $(NAME)
-	@cd tests && ./main
+	@$(CC) -g tests/main.c build/libft$(NAME).a -o tests/$(NAME)
+	./tests/$(NAME)
 
 lib:
 	@make -C $(LIBFT)
