@@ -1,5 +1,5 @@
 NAME := libftprintf.a
-SRCS := parse.c print.c ft_printf.c parser.c printf.c
+SRCS := parse.c print.c ft_printf.c parser.c
 LIBFT_SRCS := libft/*.o
 OBJS := $(SRCS:.c=.o)
 INC := $(addprefix -I, libft includes)
@@ -17,7 +17,7 @@ clean:
 	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm -rf $(name)
+	@rm -rf $(NAME)
 
 re: fclean all
 
