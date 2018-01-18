@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/17 17:42:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 13:26:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_arg(t_num *num)
 		if (num->type == 's')
 			write(1, num->value, num->str_len);
 		else if (num->type == 'c')
-			write(1, &num->value, 1);
+			write(1, num->value, 1);
 		else
 			ft_putstr(num->value);
 		if (!num->left)

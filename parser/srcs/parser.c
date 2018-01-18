@@ -6,11 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/17 17:52:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 19:23:04 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "libft.h"
 
 static void	set(int *flag, char c1, char c2)
 {

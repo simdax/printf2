@@ -8,6 +8,8 @@ cp -r libft build
 hs=`find . -name "*.h" | grep -v libft | grep -v build`
 cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v main.c`
 
+echo $cs
+
 for h in $hs; do
 	echo $h
 	cp $h build/includes
