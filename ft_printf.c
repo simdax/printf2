@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 19:22:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 19:33:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,12 @@ static int		count_percents(const char *str)
 	return (count);
 }
 
-static void		parse_arg(t_args *args, const char *str, va_list arg)
+static void		init_args(t_args *args, const char *str)
 {
-	while (args->count < args->nb_args)
-	{
-		args->cpy = ft_strchr(str, '%');
-		args->stock[args->count] = ft_strsub(str, 0, args->cpy - str);
-		args->flags = parse(args->cpy + 1);
-		if (args->flags.star)
-			args->flags.width = va_arg(arg, int);
-		args->nums[args->count] = flags2print(arg, args->flags);
-		if (args->cpy[args->flags.count] == '%')
-			--args->nb_args;
-		str = args->cpy + args->flags.count + 1;
-		++args->count;
-	}
+	args->count = 0;
+	args->nb_args = count_percents(str);
+	args->nums = (t_num*)malloc(sizeof(t_num) * (args->nb_args + 1));
+	args->stock = (char**)malloc(sizeof(char*) * (args->nb_args + 2));
 }
 
 int				ft_printf(const char *str, ...)
@@ -95,14 +86,23 @@ int				ft_printf(const char *str, ...)
 	va_list		arg;
 	t_args		args;
 
-	args.count = 0;
-	args.nb_args = count_percents(str);
-	args.nums = (t_num*)malloc(sizeof(t_num) * (args.nb_args + 1));
-	args.stock = (char**)malloc(sizeof(char*) * (args.nb_args + 2));
+	init_args(&args, str);
 	if (args.nb_args)
 	{
 		va_start(arg, str);
-		parse_arg(&args, str, arg);
+		while (args.count < args.nb_args)
+		{
+			args.cpy = ft_strchr(str, '%');
+			args.stock[args.count] = ft_strsub(str, 0, args.cpy - str);
+			args.flags = parse(args.cpy + 1);
+			if (args.flags.star)
+				args.flags.width = va_arg(arg, int);
+			args.nums[args.count] = flags2print(arg, args.flags);
+			if (args.cpy[args.flags.count] == '%')
+				--args.nb_args;
+			str = args.cpy + args.flags.count + 1;
+			++args.count;
+		}
 		va_end(arg);
 	}
 	args.stock[args.count] = (char*)str;
