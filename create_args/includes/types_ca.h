@@ -8,24 +8,24 @@ typedef struct		s_num
 {
 	int    		sign;
 	int 		star;
-	int    		alternate; // 0 1
+	int    		alternate;
 	int			space;
 	int    		base;	
 	char		type;
 	char		*modifiers;
-	int			padding; // neg means right
-	char		zero; // neg means right
+	int			padding;
+	char		zero;
 	int	    	left;
-	int    		precision; // neg means right
+	int    		precision;
 	char		*value;
-	int    		str_len; // size of number rep
-	size_t		count; // nb of printed letters
-}			t_num;
+	int    		str_len;
+	size_t		count;
+}					t_num;
 
 typedef struct 		s_str
 {
-	int				padding;
-	void			*value;
+	int			padding;
+	void		*value;
 }					t_str;
 
 #endif

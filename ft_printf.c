@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2017/11/24 14:27:21 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/01/17 18:05:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 09:59:02 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -92,19 +92,19 @@ static int		count_percents(const char *str)
 	return (count);
 }
 
-typedef struct args {
+typedef struct	s_args {
 	int			nb_args;
 	char		*cpy;
 	char		**stock;
 	t_num		*nums;
 	t_flags		flags;
 	int			count;	
-};
+}				t_args;
 
 int			ft_printf(const char* str, ...)
 {
 	va_list		arg;
-	args		args;
+	t_args		args;
 	
 	args.count = 0;
 	args.nb_args = count_percents(str);
