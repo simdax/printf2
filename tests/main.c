@@ -35,9 +35,9 @@ int		main(int argc, char **argv)
 	print("%jx", -4294967296, 20);
 	print("%jd", -4294967296, 20);
 	print("%#x", 0, 0);
-//	print("%-#08x", 42, 0);
-//	print("%#08x", 42, 0);
-//	print("%0#.x", 0, 0);
+	print("%-#08x", 42, 0);
+	print("%#08x", 42, 0);
+	print("%0#.x", 0, 0);
 	print2("%.2s is a string and a char %c", "", 0);
 	print2("%.2s is a string and a char %5c tec", "", 42);
 	ft_printf("%*d", 10, 5);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 19:23:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/21 18:39:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ static void	take_type(char **s, char *flags)
 		flags[i] = 'E';
 }
 
+static int	matoi(char *str)
+{
+	int res;
+
+	res = 0;
+	while (*str && ft_isdigit(*str))
+		res = *str++ - '0' + res * 10;
+	return (res);
+}
+
 t_flags		parse(char *str)
 {
 	t_flags		flags;
@@ -74,12 +84,12 @@ t_flags		parse(char *str)
 	cpy = str;
 	flags = (t_flags){0, 0, 0, 0, 0, 0, 0, -1, 0, "E", 0};
 	take_flags(&str, &flags);
-	flags.width = ft_atoi(str);
+	flags.width = matoi(str);
 	str += flags.width ? ft_nbrsize(flags.width) : 0;
 	if (*str == '.')
 	{
 		++str;
-		flags.precision = ft_atoi(str);
+		flags.precision = matoi(str);
 		if (flags.precision)
 			str += ft_nbrsize(flags.precision);
 		else if (str[0] == '0')

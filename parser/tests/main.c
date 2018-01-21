@@ -1,4 +1,5 @@
-#include "parser.h"
+#include "prototypes_par.h"
+#include <stdio.h>
 
 void print_struct(t_flags t)
 {
@@ -16,7 +17,6 @@ void print_struct(t_flags t)
 
 int main(int argc, char **argv)
 {
-    t_flags t;
-    t = parse(argv[1]);
+    t_flags t = parse(argv[1]);
     print_struct(t);
 }
