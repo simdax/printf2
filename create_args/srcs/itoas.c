@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:38:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 13:26:49 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/21 18:03:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,25 @@ static void		cast_s(t_num *a, void *val)
 static void		cast_u(t_num *a, void *val)
 {
 	if (ft_strequ("hh", a->modifiers))
-		a->value = s_itoa(*(unsigned char*)val,
+		a->value = u_itoa(*(unsigned char*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else if (ft_strequ("h", a->modifiers))
-		a->value = s_itoa(*(unsigned short*)val,
+		a->value = u_itoa(*(unsigned short*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else if (ft_strequ("l", a->modifiers))
-		a->value = s_itoa(*(unsigned long*)val,
+		a->value = u_itoa(*(unsigned long*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else if (ft_strequ("ll", a->modifiers))
-		a->value = s_itoa(*(unsigned long long*)val,
+		a->value = u_itoa(*(unsigned long long*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else if (ft_strequ("j", a->modifiers))
-		a->value = s_itoa(*(uintmax_t*)val,
+		a->value = u_itoa(*(uintmax_t*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else if (ft_strequ("z", a->modifiers))
-		a->value = s_itoa(*(size_t*)val,
+		a->value = u_itoa(*(size_t*)val,
 						(int)ft_strchr("OUX", a->type), a);
 	else
-		a->value = s_itoa(*(unsigned int*)val,
+		a->value = u_itoa(*(unsigned int*)val,
 						(int)ft_strchr("OUX", a->type), a);
 }
 
