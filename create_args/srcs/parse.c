@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 18:47:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/21 19:09:38 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int		parse_value(void *value, t_num *a)
 	if (a->type != 'c' && ft_strequ(a->value, "0")
 		&& a->precision == 0)
 	{
-		a->value = "";
+		free(a->value);
+		a->value = ft_strdup("");
 		if (ft_strchr("xX", a->type))
 			a->alternate = 0;
 	}
