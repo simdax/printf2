@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo scornaz > build/auteur
 rm -rf build/ft_printf.h
 rm -rf build/*.c
 mkdir -p build/includes

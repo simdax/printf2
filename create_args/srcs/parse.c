@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/21 19:09:38 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/21 19:48:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		parse_value(void *value, t_num *a)
 {
 	if (ft_strchr("oO", a->type))
 		a->base = 8;
-	if (ft_strchr("xX", a->type))
+	else if (ft_strchr("xX", a->type))
 		a->base = 16;
 	else
 		a->base = 10;
@@ -72,12 +72,12 @@ void	re_orga2(t_num *a)
 
 void	re_orga(t_num *a)
 {
-	a->str_len = a->type == 'c' ? 1 : ft_strlen(a->value);
+	a->str_len = ft_strchr("cC", a->type) ? 1 : ft_strlen(a->value);
 	if (a->type != 'c' && ft_strequ("0", a->value) && ft_strchr("xX", a->type))
 		a->alternate = 0;
 	if (a->alternate && ft_strchr("xX", a->type))
 		a->str_len += 2;
-	if (a->type == 's')
+	if (ft_strchr("sS", a->type))
 	{
 		a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
 			a->str_len : a->precision;
@@ -86,7 +86,7 @@ void	re_orga(t_num *a)
 	a->count = a->str_len;
 	a->precision = IF(a->precision - a->str_len);
 	if (a->alternate && ft_strchr("oO", a->type))
-		++a->precision;
+		a->precision = a->precision ? a->precision : 1;
 	if (a->sign != 0 || a->space)
 		++a->str_len;
 	a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));

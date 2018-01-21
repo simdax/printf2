@@ -26,10 +26,23 @@ void	print2(char *s1, char *s2, char c)
 	write(1, "\n", 1);
 }
 
+void	print3(char *s1)
+{
+	write(1, "moi:\n", 5);
+	printf("(%d)", ft_printf(s1));
+	fflush(stdout);
+	write(1, "\nvrai:\n", 7);
+	printf("(%d)", printf(s1));
+	fflush(stdout);
+	write(1, "\n", 1);
+}
+
 int		main(int argc, char **argv)
 {
+	print3("%%");
 	print("coucou %#01.10d les %d loulous", 50, -20);
 	print("coucou %#-+01.4u les loulous", 20, 0);
+	print("coucou %#-+1.4o les loulous", 20, 0);
 	print("coucou %ld et %lx", 4294967296, 4294967296);
 	print("%#x", 20, 20);
 	print("%jx", -4294967296, 20);
