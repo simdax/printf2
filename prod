@@ -3,7 +3,7 @@
 rm -rf build/ft_printf.h
 rm -rf build/*.c
 mkdir -p build/includes
-cp -r libft build
+cp -R libft build
 
 hs=`find . -name "*.h" | grep -v libft | grep -v build`
 cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v main.c`
@@ -23,14 +23,14 @@ done
 cat <<end > build/Makefile 
 NAME := libftprintf.a
 SRCS := $(echo $(basename $cs))
-LIBFT_SRCS := ../../*.o
+LIBFT_OBJS := \$(addprefix libft/, ft_atoi.o ft_nbrsize.o ft_putchar.o ft_putstr.o ft_strany.o ft_strchr.o ft_strequ.o ft_strlen.o ft_strsub.o ft_isdigit.o ft_issep.o)
 OBJS := \$(SRCS:.c=.o)
-INC := \$(addprefix -I, ../.. includes)
+INC := \$(addprefix -I, libft includes)
 
 all: \$(NAME)
 
 \$(NAME): \$(OBJS)
-	@ar cr \$(NAME) \$(OBJS) \$(LIBFT_SRCS)
+	@ar cr \$(NAME) \$(OBJS) \$(LIBFT_OBJS)
 	@ranlib \$(NAME)
 
 %.o : %.c
