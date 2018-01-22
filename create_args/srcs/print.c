@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/22 18:09:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/22 18:37:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_arg(t_num *num)
 {
-	if (num->left)
+	if (num->padding && num->left)
 		print_padding(num->padding, num->zero ? '0' : ' ', &num->count);
 	if (num->alternate)
 		print_alternate(num);
@@ -28,7 +28,7 @@ void	print_arg(t_num *num)
 		ft_putstr_utf8((int*)num->value);
 	else
 		ft_putstr(num->value);
-	if (!num->left)
+	if (num->padding && !num->left)
 		print_padding(num->padding, ' ', &num->count);
 }
 

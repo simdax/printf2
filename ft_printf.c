@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/21 19:53:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/22 18:43:16 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_num	flags2print(va_list arg, t_flags flags)
 
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
-	re_orga2(&a);
 	if (a.type == 's')
 	{
 		string = va_arg(arg, char*);
@@ -30,13 +29,14 @@ static t_num	flags2print(va_list arg, t_flags flags)
 	else if (a.type == '%')
 	{
 		a.value = ft_strdup("%");
-		a.type = 's';
+		a.type = 'c';
 	}
 	else
 	{
 		value = va_arg(arg, intmax_t);
 		parse_value(&value, &a);
 	}
+	re_orga2(&a);
 	re_orga(&a);
 	return (a);
 }
