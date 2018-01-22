@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/21 18:39:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/22 15:49:44 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,25 @@ static int	matoi(char *str)
 	return (res);
 }
 
+void		change_type(t_flags *flags)
+{
+	if (ft_strchr(flags->type, 'U'))
+	{
+		flags->type[0] = 'l';
+		flags->type[1] = 'u';
+	}
+	if (ft_strchr(flags->type, 'O'))
+	{
+		flags->type[0] = 'l';
+		flags->type[1] = 'o';
+	}
+	if (ft_strchr(flags->type, 'D'))
+	{
+		flags->type[0] = 'l';
+		flags->type[1] = 'd';
+	}
+}
+
 t_flags		parse(char *str)
 {
 	t_flags		flags;
@@ -97,6 +116,7 @@ t_flags		parse(char *str)
 	}
 	if (*str)
 		take_type(&str, flags.type);
+	change_type(&flags);
 	flags.count = str - cpy;
 	return (flags);
 }

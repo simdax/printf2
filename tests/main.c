@@ -39,6 +39,8 @@ void	print3(char *s1)
 
 int		main(int argc, char **argv)
 {
+	print("%hU", 4294967296, 0);
+	print("%U", 4294967296, 0);
 	print3("%%");
 	print("coucou %#01.10d les %d loulous", 50, -20);
 	print("coucou %#-+01.4u les loulous", 20, 0);

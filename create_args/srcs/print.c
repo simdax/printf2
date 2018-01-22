@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/21 19:54:10 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/22 18:09:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	print_arg(t_num *num)
 		write(1, num->value, num->str_len);
 	else if (num->type == 'c')
 		write(1, num->value, 1);
+	else if (ft_strchr("SC", num->type))
+		ft_putstr_utf8((int*)num->value);
 	else
 		ft_putstr(num->value);
 	if (!num->left)

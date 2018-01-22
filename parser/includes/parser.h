@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 19:14:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 19:18:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/22 15:15:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_flags
 }				t_flags;
 
 # define FLAGS		"0#+- '*"
-# define TYPES		"scdiouxSCDIOUX%"
+# define TYPES		"sSpdDioOuUxXcC%"
 # define MODIFIERS2	"hl"
 # define MODIFIERS1	"jz"
 
