@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 14:50:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 17:04:40 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ void	re_orga(t_num *a)
 	}
 	a->count = a->str_len;
 	a->precision = ft_notneg(a->precision - a->str_len);
-	if (a->alternate && ft_strchr("oO", a->type))
+	if (a->alternate && ft_strchr("oO", a->type) && a->value[0] != '0')
 		a->precision = a->precision ? a->precision : 1;
 	a->padding = ft_notneg(ft_abs(a->padding) - (a->str_len + a->precision));
+	a->padding = ft_notneg(a->padding - (a->sign != 0 || a->space));
 	if (a->alternate && ft_strchr("xX", a->type))
 		a->padding = ft_notneg(a->padding - 2);
 	if (a->zero && a->left)

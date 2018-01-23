@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:38:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 13:49:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 15:03:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,15 @@ void			ret_val(t_num *a, void *val)
 		cast_u(a, val);
 	else
 	{
-		a->value = malloc(1);
-		*(a->value) = *(char*)val;
+		if (a->type == 'c')
+		{
+			a->value = malloc(1);
+			*(a->value) = *(char*)val;
+		}
+		else if (a->type == 'C')
+		{
+			a->value = malloc(1);
+			*(a->value) = *(int*)val;
+		}
 	}
 }

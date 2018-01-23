@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:52:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 13:45:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 16:57:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void		hydrate(t_num *a, t_flags *flags)
 	a->padding = flags->width;
 	a->precision = flags->precision;
 	a->alternate = flags->hash;
-	a->zero = flags->zero;
 	a->sign = flags->plus;
+	a->zero = flags->zero;
+//	a->zero = a->sign != 1 ? flags->zero : 0;
 	a->space = flags->space;
 }
 

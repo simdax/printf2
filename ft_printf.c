@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 14:28:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 16:59:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static t_num	flags2print(va_list arg, t_flags flags)
 	
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
-	if (ft_strchr("Ss", a.type))
+	if (a.type == 'E')
+	{
+		a.value = ft_strdup("");
+	}
+	else if (ft_strchr("Ss", a.type))
 	{
 		string = va_arg(arg, char*);
 		a.value = !string ? ft_strdup("(null)") : string;

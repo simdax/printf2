@@ -39,6 +39,9 @@ void	print3(char *s1)
 
 int		main(int argc, char **argv)
 {
+	ft_printf("%0+5d\n", 42);
+	ft_printf("asdfsad%abonhjoue\n", 42);
+	ft_printf("%#o\n", 0);
 	print("%-#08x", 42, 0);
 	print("%#08x", 42, 0);
 	print("coucou %#01.10d les %d loulous", 50, -20);

@@ -58,7 +58,7 @@ re:	alllibs
 debug: b
 	lldb tests/$(NAME)
 
-test: 
+test: b
 	@$(CC) -g tests/main.c build/libft$(NAME).a -o tests/$(NAME)
 	./tests/$(NAME)
 

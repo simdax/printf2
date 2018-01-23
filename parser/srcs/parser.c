@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/22 15:49:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 15:06:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,22 @@ void		change_type(t_flags *flags)
 		flags->type[0] = 'l';
 		flags->type[1] = 'u';
 	}
-	if (ft_strchr(flags->type, 'O'))
+	else if (ft_strchr(flags->type, 'O'))
 	{
 		flags->type[0] = 'l';
 		flags->type[1] = 'o';
 	}
-	if (ft_strchr(flags->type, 'D'))
+	else if (ft_strchr(flags->type, 'D'))
 	{
 		flags->type[0] = 'l';
 		flags->type[1] = 'd';
+	}
+	else if (ft_strchr(flags->type, 'p'))
+	{
+		flags->hash = 1;
+		flags->type[0] = 'l';
+		flags->type[1] = 'l';
+		flags->type[2] = 'x';
 	}
 }
 
