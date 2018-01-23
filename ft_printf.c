@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 14:06:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 14:28:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_num	flags2print(va_list arg, t_flags flags)
 		value = va_arg(arg, intmax_t);
 		parse_value(&value, &a);
 	}
-	re_orga2(&a);
 	re_orga(&a);
 	return (a);
 }

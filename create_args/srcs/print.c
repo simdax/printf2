@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 13:50:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 14:23:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static void	wide_string(t_num *num, t_array *buffer)
 
 void		print_arg(t_num *num, t_array *buffer)
 {
-	if (num->padding && num->left)
+	if (num->left && num->padding)
 		print_padding(num->padding, num->zero ? '0' : ' ', buffer);
 	if (num->alternate)
 		print_alternate(num, buffer);
-	print_sign(num->sign, num->type, num->space, buffer);
-	print_padding(num->precision, '0', buffer);
+	if (num->sign || num->space)
+		print_sign(num->sign, num->type, num->space, buffer);
+	if (num->precision)
+		print_padding(num->precision, '0', buffer);
 	if (num->type == 's')
 		array_add(buffer, num->value, num->str_len);
 	else if (num->type == 'c')

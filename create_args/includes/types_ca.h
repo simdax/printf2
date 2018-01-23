@@ -6,15 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:40:20 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 19:16:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 14:38:43 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_CA_H
 # define TYPES_CA_H
-
-# define ABS(value)	value < 0 ? -value : value
-# define IF(value)	value < 0 ? 0 : value
 
 typedef struct		s_num
 {

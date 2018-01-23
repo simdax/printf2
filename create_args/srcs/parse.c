@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 14:08:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 14:50:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		parse_value(void *value, t_num *a)
 	return (1);
 }
 
-void	re_orga2(t_num *a)
+static void	re_orga2(t_num *a)
 {
 	if (ft_strchr("diouxDIOUX", a->type) && a->precision > 0)
 		a->zero = 0;
@@ -72,11 +72,10 @@ void	re_orga2(t_num *a)
 
 void	re_orga(t_num *a)
 {
+	re_orga2(a);
 	a->str_len = ft_strchr("cC", a->type) ? 1 : ft_strlen(a->value);
 	if (a->type != 'c' && ft_strequ("0", a->value) && ft_strchr("xX", a->type))
 		a->alternate = 0;
-	if (a->alternate && ft_strchr("xX", a->type))
-		a->str_len += 2;
 	if (ft_strchr("sS", a->type))
 	{
 		a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
@@ -84,12 +83,12 @@ void	re_orga(t_num *a)
 		a->precision = 0;
 	}
 	a->count = a->str_len;
-	a->precision = IF(a->precision - a->str_len);
+	a->precision = ft_notneg(a->precision - a->str_len);
 	if (a->alternate && ft_strchr("oO", a->type))
 		a->precision = a->precision ? a->precision : 1;
-	if (a->sign != 0 || a->space)
-		++a->str_len;
-	a->padding = IF(ABS(a->padding) - (a->str_len + a->precision));
+	a->padding = ft_notneg(ft_abs(a->padding) - (a->str_len + a->precision));
+	if (a->alternate && ft_strchr("xX", a->type))
+		a->padding = ft_notneg(a->padding - 2);
 	if (a->zero && a->left)
 	{
 		a->precision = a->padding;
