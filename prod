@@ -3,8 +3,8 @@
 echo scornaz > build/auteur
 rm -rf build/ft_printf.h
 rm -rf build/*.c
-mkdir -p build/includes
-cp -R libft build
+mkdir -p build/includes 2> /dev/null
+cp -R libft build 2> /dev/null
 
 hs=`find . -name "*.h" | grep -v libft | grep -v build`
 cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v main.c`
@@ -12,19 +12,19 @@ cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v
 echo $cs
 
 for h in $hs; do
-	echo $h
-	cp $h build/includes
+#	echo $h
+	cp $h build/includes 2> /dev/null
 done
 
 for c in $cs; do
-	echo $c
-	cp $c build
+#	echo $c
+	cp $c build 2> /dev/null
 done
 
 cat <<end > build/Makefile 
 NAME := libftprintf.a
 SRCS := $(echo $(basename $cs))
-LIBFT_OBJS := \$(addprefix libft/, ft_atoi.o ft_nbrsize.o ft_putchar.o ft_putstr.o ft_strany.o ft_strchr.o ft_strequ.o ft_strlen.o ft_strsub.o ft_isdigit.o ft_issep.o ft_strdup.o unicode.o ft_bzero.o ft_strcmp.o)
+LIBFT_OBJS := \$(addprefix libft/, ft_atoi.o ft_nbrsize.o ft_putchar.o ft_putstr.o string/ft_strany.o string/ft_strchr.o string/ft_strequ.o string/ft_strlen.o ft_strsub.o ft_isdigit.o ft_issep.o string/ft_strdup.o unicode/unicode.o ft_bzero.o string/ft_strcmp.o array/array.o ft_memcpy.o)
 OBJS := \$(SRCS:.c=.o)
 INC := \$(addprefix -I, libft includes)
 

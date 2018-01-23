@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 19:04:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 19:04:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 11:20:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <stdint.h>
 # include "libft.h"
-
 # include "types_ca.h"
 # include "prototypes_ca.h"
 
