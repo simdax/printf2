@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:38:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/21 18:03:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 13:49:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,13 @@ static void		cast_u(t_num *a, void *val)
 
 void			ret_val(t_num *a, void *val)
 {
-	if (a->type == '%')
-		a->value = "%";
-	else if (ft_strchr("diDI", a->type))
+	if (ft_strchr("diDI", a->type))
 		cast_s(a, val);
 	else if (ft_strchr("ouxOUX", a->type))
 		cast_u(a, val);
 	else
 	{
 		a->value = malloc(1);
-		*(a->value) = *(int*)val;
+		*(a->value) = *(char*)val;
 	}
 }

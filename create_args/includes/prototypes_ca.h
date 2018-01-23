@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:40:11 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 12:23:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 13:49:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 # include "libft.h"
 
-void	choose_itoa(char type, void *val, size_t *c);
-void	itoa_base_dioux(unsigned int *i, size_t base, size_t *c);
 void	parse_flags(char *str, t_num *a);
 int		split_type(char *type, t_num *a);
 int		parse_value(void *value, t_num *a);
 void	print_alternate(t_num *type, t_array *array);
 void	print_arg(t_num *num, t_array *array);
-void	print_padding(size_t count, char with, size_t *c, t_array *array);
-void	print_sign(int sign, size_t *c, char type, int space, t_array *array);
-void	print_value(void *val, char type, size_t *c,
+void	print_padding(size_t count, char with, t_array *array);
+void	print_sign(int sign, char type, int space, t_array *array);
+void	print_value(void *val, char type,
 					size_t precision, t_array *array);
 void	re_orga(t_num *a);
 void	re_orga2(t_num *a);

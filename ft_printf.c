@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 11:50:37 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 14:06:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static t_num	flags2print(va_list arg, t_flags flags)
 	
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
-	if (ft_strchr("SsCc", a.type))
+	if (ft_strchr("Ss", a.type))
 	{
 		string = va_arg(arg, char*);
-		a.value = !string ? "(null)" : string;
+		a.value = !string ? ft_strdup("(null)") : string;
 	}
 	else if (a.type == '%')
 	{
@@ -43,7 +43,6 @@ static t_num	flags2print(va_list arg, t_flags flags)
 
 static int		print(char **str, t_num *nums, int len, const char *last)
 {
-	int		count;
 	int		tmp;
 	char	**cpy;
 	t_num	*cpy_nums;
@@ -52,22 +51,21 @@ static int		print(char **str, t_num *nums, int len, const char *last)
 	buffer = new_array(sizeof(char), 1024);
 	cpy = str;
 	cpy_nums = nums;
-	count = 0;
 	while (len--)
-		print_and_free(&nums, &str, &count, buffer);
+		print_and_free(&nums, &str, buffer);
 	if (str && *str)
 	{
 		tmp = ft_strlen(*str);
 		array_add(buffer, *str, tmp);
-//		ft_putstr(*str);
-		count += tmp;
 		if (*str != last)
 			free(*str);
 	}
 	free(cpy);
 	free(cpy_nums);
-	write(1, buffer->mem, count);
-	return (count);
+	write(1, buffer->mem, buffer->cursor);
+	tmp = buffer->cursor;
+	free_array(buffer);
+	return (tmp);
 }
 
 static int		count_percents(const char *str)
