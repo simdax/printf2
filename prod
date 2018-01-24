@@ -1,10 +1,10 @@
 #!/bin/sh
 
+rm -rf build/
+mkdir build
+mkdir build/includes
+cp -R libft build
 echo scornaz > build/auteur
-rm -rf build/ft_printf.h
-rm -rf build/*.c
-mkdir -p build/includes 2> /dev/null
-cp -R libft build 2> /dev/null
 
 hs=`find . -name "*.h" | grep -v libft | grep -v build`
 cs=`find . -name "*.c" | grep -v libft | grep -v build | grep -v tests | grep -v main.c`

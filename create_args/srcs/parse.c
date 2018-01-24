@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 11:25:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 12:19:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		re_orga(t_num *a)
 	{
 		a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
 			a->str_len : a->precision;
-		a->pxrecision = 0;
+		a->precision = 0;
 	}
 	a->count = a->str_len;
 	a->precision = ft_notneg(a->precision - a->str_len);

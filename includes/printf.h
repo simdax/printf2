@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:29:39 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 18:42:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 15:19:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,23 @@
 # include "libft.h"
 # include "parser.h"
 # include "create_args.h"
-# include "types.h"
-# include "prototypes.h"
+# include "prototypes_ca.h"
+
+typedef struct	s_args {
+	int			nb_args;
+	char		*cpy;
+	char		**stock;
+	t_num		*nums;
+	t_flags		flags;
+	int			count;
+}				t_args;
+
+t_num		flags2print(va_list arg, t_flags flags);
+int			count_percents(const char *str);
+void		init_args(t_args *args, const char *str);
+int			ft_printf(const char *str, ...);
+char		*ft_sprintf(char *io, const char *str, ...);
+void		print_and_free(t_num **nums, char ***str, t_array *buffer);
+void		hydrate(t_num *a, t_flags *flags);
 
 #endif
