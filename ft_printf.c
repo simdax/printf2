@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 11:10:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 11:15:03 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include "prototypes_par.h"
 
-static t_num	flags2print(va_list arg, t_flags flags)
+t_num			flags2print(va_list arg, t_flags flags)
 {
 	t_num		a;
 	intmax_t	value;
@@ -71,7 +71,7 @@ static int		print(char **str, t_num *nums, int len, const char *last)
 	return (tmp);
 }
 
-static int		count_percents(const char *str)
+int			count_percents(const char *str)
 {
 	int count;
 
@@ -85,7 +85,7 @@ static int		count_percents(const char *str)
 	return (count);
 }
 
-static void		init_args(t_args *args, const char *str)
+void		init_args(t_args *args, const char *str)
 {
 	args->count = 0;
 	args->nb_args = count_percents(str);

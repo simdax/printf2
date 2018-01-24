@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 17:16:41 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 11:25:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_args.h"
 
-int		split_type(char *type, t_num *a)
+int			split_type(char *type, t_num *a)
 {
 	if (type && ft_strlen(type) == 1)
 	{
@@ -34,7 +34,7 @@ int		split_type(char *type, t_num *a)
 	return (1);
 }
 
-int		parse_value(void *value, t_num *a)
+int			parse_value(void *value, t_num *a)
 {
 	if (ft_strchr("oO", a->type))
 		a->base = 8;
@@ -70,7 +70,7 @@ static void	re_orga2(t_num *a)
 	}
 }
 
-void	re_orga(t_num *a)
+void		re_orga(t_num *a)
 {
 	re_orga2(a);
 	a->str_len = ft_strchr("cC", a->type) ? 1 : ft_strlen(a->value);
@@ -80,7 +80,7 @@ void	re_orga(t_num *a)
 	{
 		a->str_len = (a->precision == -1 || a->precision > a->str_len) ?
 			a->str_len : a->precision;
-		a->precision = 0;
+		a->pxrecision = 0;
 	}
 	a->count = a->str_len;
 	a->precision = ft_notneg(a->precision - a->str_len);

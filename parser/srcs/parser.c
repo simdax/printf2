@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 17:12:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 11:24:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,6 @@ static int	matoi(char *str)
 	while (*str && ft_isdigit(*str))
 		res = *str++ - '0' + res * 10;
 	return (res);
-}
-
-void		change_type(t_flags *flags)
-{
-	if (ft_strchr(flags->type, 'U'))
-	{
-		flags->type[0] = 'l';
-		flags->type[1] = 'u';
-	}
-	else if (ft_strchr(flags->type, 'O'))
-	{
-		flags->type[0] = 'l';
-		flags->type[1] = 'o';
-	}
-	else if (ft_strchr(flags->type, 'D'))
-	{
-		flags->type[0] = 'l';
-		flags->type[1] = 'd';
-	}
-	else if (ft_strchr(flags->type, 'p'))
-	{
-		flags->hash = 1;
-		flags->type[0] = 'l';
-		flags->type[1] = 'l';
-		flags->type[2] = 'p';
-	}
 }
 
 t_flags		parse(char *str)
