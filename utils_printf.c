@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:52:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 16:57:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 11:05:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		hydrate(t_num *a, t_flags *flags)
 	a->alternate = flags->hash;
 	a->sign = flags->plus;
 	a->zero = flags->zero;
-//	a->zero = a->sign != 1 ? flags->zero : 0;
 	a->space = flags->space;
 }
 
@@ -38,7 +37,7 @@ void		print_and_free(t_num **nums, char ***str, t_array *buffer)
 	free(**str);
 	++(*str);
 	print_arg(*nums, buffer);
-	if (!ft_strchr("sScC", (*nums)->type))
-		free((*nums)->value);
+	free((*nums)->value);
+	free((*nums)->modifiers);
 	++(*nums);
 }

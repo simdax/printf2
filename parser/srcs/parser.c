@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 15:06:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 17:12:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		change_type(t_flags *flags)
 		flags->hash = 1;
 		flags->type[0] = 'l';
 		flags->type[1] = 'l';
-		flags->type[2] = 'x';
+		flags->type[2] = 'p';
 	}
 }
 

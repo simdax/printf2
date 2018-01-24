@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:38:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 15:03:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 17:12:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void			ret_val(t_num *a, void *val)
 {
 	if (ft_strchr("diDI", a->type))
 		cast_s(a, val);
-	else if (ft_strchr("ouxOUX", a->type))
+	else if (ft_strchr("ouxOUXp", a->type))
 		cast_u(a, val);
 	else
 	{

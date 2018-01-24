@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 16:59:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 11:10:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_num	flags2print(va_list arg, t_flags flags)
 	else if (ft_strchr("Ss", a.type))
 	{
 		string = va_arg(arg, char*);
-		a.value = !string ? ft_strdup("(null)") : string;
+		a.value = !string ? ft_strdup("(null)") : ft_strdup(string);
 	}
 	else if (a.type == '%')
 	{

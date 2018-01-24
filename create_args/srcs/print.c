@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 16:19:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 17:15:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void		print_alternate(t_num *num, t_array *buffer)
 	if (num->type == 'X')
 		array_add(buffer, "0X", 2);
 	else if (num->type == 'x')
+		array_add(buffer, "0x", 2);
+	else if (num->type == 'p')
 		array_add(buffer, "0x", 2);
 }
 

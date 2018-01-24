@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 17:04:40 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/23 17:16:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		parse_value(void *value, t_num *a)
 {
 	if (ft_strchr("oO", a->type))
 		a->base = 8;
-	else if (ft_strchr("xX", a->type))
+	else if (ft_strchr("xXp", a->type))
 		a->base = 16;
 	else
 		a->base = 10;
@@ -48,7 +48,7 @@ int		parse_value(void *value, t_num *a)
 	{
 		free(a->value);
 		a->value = ft_strdup("");
-		if (ft_strchr("xX", a->type))
+		if (ft_strchr("xXp", a->type))
 			a->alternate = 0;
 	}
 	return (1);
@@ -56,9 +56,9 @@ int		parse_value(void *value, t_num *a)
 
 static void	re_orga2(t_num *a)
 {
-	if (ft_strchr("diouxDIOUX", a->type) && a->precision > 0)
+	if (ft_strchr("diouxDIOUXp", a->type) && a->precision > 0)
 		a->zero = 0;
-	if (ft_strchr("ouxOUX", a->type))
+	if (ft_strchr("ouxOUXp", a->type))
 	{
 		a->sign = 0;
 		a->space = 0;
@@ -88,7 +88,7 @@ void	re_orga(t_num *a)
 		a->precision = a->precision ? a->precision : 1;
 	a->padding = ft_notneg(ft_abs(a->padding) - (a->str_len + a->precision));
 	a->padding = ft_notneg(a->padding - (a->sign != 0 || a->space));
-	if (a->alternate && ft_strchr("xX", a->type))
+	if (a->alternate && ft_strchr("xXp", a->type))
 		a->padding = ft_notneg(a->padding - 2);
 	if (a->zero && a->left)
 	{

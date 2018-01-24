@@ -39,6 +39,7 @@ void	print3(char *s1)
 
 int		main(int argc, char **argv)
 {
+	ft_printf("%    p\n", 0);
 	ft_printf("%0+5d\n", 42);
 	ft_printf("asdfsad%abonhjoue\n", 42);
 	ft_printf("%#o\n", 0);
