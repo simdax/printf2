@@ -43,34 +43,34 @@ int		main(int argc, char **argv)
 	char io[100];
 	ft_sprintf(io, "%    d et %p\n", 45, 0);
 	ft_printf("%s", io);
-	/* ft_printf("%    p\n", 0); */
-	/* ft_printf("%0+5d\n", 42); */
-	/* ft_printf("asdfsad%abonhjoue\n", 42); */
-	/* ft_printf("%#o\n", 0); */
-	/* print("%-#08x", 42, 0); */
-	/* print("%#08x", 42, 0); */
-	/* print("coucou %#01.10d les %d loulous", 50, -20); */
-	/* ft_printf("%S\n", L"%.0%"); */
-	/* ft_printf("%S\n", L"%.🙃0%"); */
-	/* ft_printf("%C\n", L'😯'); */
-	/* ft_printf("😘\n"); */
-	/* print3("%.0%"); */
-	/* print2("%   %", "test", 0); */
-	/* print("%hU", 4294967296, 0); */
-	/* print("%U", 4294967296, 0); */
-	/* print3("%%"); */
-	/* print("coucou %#-+01.4u les loulous", 20, 0); */
-	/* print("coucou %#-+1.4o les loulous", 20, 0); */
-	/* print("coucou %ld et %lx", 4294967296, 4294967296); */
-	/* print("%#x", 20, 20); */
-	/* print("%jx", -4294967296, 20); */
-	/* print("%jd", -4294967296, 20); */
-	/* print("%#x", 0, 0); */
-	/* print("%0#.x", 0, 0); */
-	/* print2("%.2s is a string and a char %c", "", 0);  */
-	/* print2("%.2s is a string and a char %5c tec", "", 42);  */
-	/* ft_printf("%*d", 10, 5); */
-	/* print("%jd", -9223372036854775808, 0); */
+	ft_printf("%    p\n", 0);
+	ft_printf("%0+5d\n", 42);
+	ft_printf("asdfsad%abonhjoue\n", 42);
+	ft_printf("%#o\n", 0);
+	print("%-#08x", 42, 0);
+	print("%#08x", 42, 0);
+	print("coucou %#01.10d les %d loulous", 50, -20);
+	ft_printf("%S\n", L"%.0%");
+	ft_printf("%S\n", L"%.🙃0%");
+	ft_printf("%C\n", L'😯');
+	ft_printf("😘\n");
+	print3("%.0%");
+	print2("%   %", "test", 0);
+	print("%hU", 4294967296, 0);
+	print("%U", 4294967296, 0);
+	print3("%%");
+	print("coucou %#-+01.4u les loulous", 20, 0);
+	print("coucou %#-+1.4o les loulous", 20, 0);
+	print("coucou %ld et %lx", 4294967296, 4294967296);
+	print("%#x", 20, 20);
+	print("%jx", -4294967296, 20);
+	print("%jd", -4294967296, 20);
+	print("%#x", 0, 0);
+	print("%0#.x", 0, 0);
+	print2("%.2s is a string and a char %c", "", 0);
+	print2("%.2s is a string and a char %5c tec", "", 42);
+	ft_printf("%*d", 10, 5);
+	print("%jd", -9223372036854775808, 0);
 	return (0);
 }
 
