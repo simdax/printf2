@@ -6,40 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:47:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:57:01 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_args.h"
-
-void		strings(t_num *a, va_list arg)
-{
-	char	*string;
-	
-	if (a->type == 's')
-	{
-		string = va_arg(arg, char*);
-		a->value = !string ? ft_strdup("(null)") : ft_strdup(string);
-	}
-	else if (a->type == 'c')
-	{
-		string = va_arg(arg, char);
-		a->value = malloc(1);
-		*(a->value) = string;
-	}
-	else if (a->type == 'S')
-	{
-		string = va_arg(arg, int*);
-		a->value = !string ? ft_strdup("(null)") : transform_utf8(string);
-		a->type = 's';
-	}
-	else if (a->type == 'C')
-	{
-		string = va_arg(arg, int);
-		a->value = transform_utf8(&string);
-		a->type = 'c';
-	}
-}
 
 void		print_arg(t_num *num, t_array *buffer)
 {

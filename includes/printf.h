@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:29:39 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 15:19:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:55:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ typedef struct	s_args {
 	t_flags		flags;
 	int			count;
 }				t_args;
+
+typedef struct	s_prout
+{
+	char		**str;
+	t_num		*nums;
+	int			len;
+	const char	*last;
+}				t_prout;
 
 t_num		flags2print(va_list arg, t_flags flags);
 int			count_percents(const char *str);

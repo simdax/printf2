@@ -6,20 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:33:21 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:11:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:55:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include "prototypes_par.h"
-
-typedef struct	s_prout
-{
-	char		**str;
-	t_num		*nums;
-	int			len;
-	const char	*last;
-}				t_prout;
 
 static char		*sprint(char *io, t_prout prout)
 {

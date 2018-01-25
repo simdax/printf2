@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:52:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:55:01 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_num			flags2print(va_list arg, t_flags flags)
 	t_num		a;
 	intmax_t	value;
 	void		*string;
-	
+
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
 	if (a.type == 'E')
@@ -66,7 +66,7 @@ static int		print(char **str, t_num *nums, int len, const char *last)
 	return (tmp);
 }
 
-int			count_percents(const char *str)
+int				count_percents(const char *str)
 {
 	int count;
 
@@ -80,7 +80,7 @@ int			count_percents(const char *str)
 	return (count);
 }
 
-void		init_args(t_args *args, const char *str)
+void			init_args(t_args *args, const char *str)
 {
 	args->count = 0;
 	args->nb_args = count_percents(str);
