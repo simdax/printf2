@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:40:11 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/23 14:28:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:26:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_sign(int sign, char type, int space, t_array *array);
 void	print_value(void *val, char type,
 					size_t precision, t_array *array);
 void	re_orga(t_num *a);
-void	ret_val(t_num *a, void *val);
+void	itoas(t_num *a, void *val);
+void	strings(t_num *a, va_list arg);
 
 #endif

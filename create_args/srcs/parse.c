@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 17:54:16 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:28:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			parse_value(void *value, t_num *a)
 		a->base = 16;
 	else
 		a->base = 10;
-	ret_val(a, value);
+	itoas(a, value);
 	if (a->type != 'c' && ft_strequ(a->value, "0")
 		&& a->precision == 0)
 	{

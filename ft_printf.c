@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 17:59:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:52:14 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,8 @@ t_num			flags2print(va_list arg, t_flags flags)
 	split_type(flags.type, &a);
 	if (a.type == 'E')
 		a.value = ft_strdup("");
-	else if (ft_strchr("s", a.type))
-	{
-		string = va_arg(arg, char*);
-		a.value = !string ? ft_strdup("(null)") : ft_strdup(string);
-	}
-	else if (a.type == 'S')
-	{
-		string = va_arg(arg, int*);
-		a.value = !string ? ft_strdup("(null)") : transform_utf8(string);
-		a.type = 's';
-	}
-	else if (a.type == 'C')
-	{
-		string = va_arg(arg, int);
-		a.value = transform_utf8(&string);
-		a.type = 'c';
-	}
+	else if (ft_strchr("csSC", a.type))
+		strings(&a, arg);
 	else if (a.type == '%')
 	{
 		a.value = ft_strdup("%");
