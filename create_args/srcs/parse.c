@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 12:19:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 17:54:16 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	re_orga2(t_num *a)
 		a->sign = 0;
 		a->space = 0;
 	}
-	if (a->type == 'c')
+	else if (a->type == 'c')
 	{
 		a->precision = 0;
 		a->space = 0;

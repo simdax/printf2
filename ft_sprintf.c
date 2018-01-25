@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:33:21 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 15:22:43 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:11:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char		*sprint(char *io, t_prout prout)
 	free(cpy);
 	free(cpy_nums);
 	ft_memcpy(io, buffer->mem, buffer->cursor);
-	tmp = buffer->cursor;
+	io[buffer->cursor] = 0;
 	free_array(buffer);
 	return (io);
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:39:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 11:23:10 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 14:34:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	wide_string(t_num *num, t_array *buffer)
 {
 	char	*result;
 
-	result = transform_utf8((int*)num->value);
+	result = transform_utf8((int*)(num->value));
 	array_add(buffer, result, ft_strlen(result));
 }
 
