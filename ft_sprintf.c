@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:33:21 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:55:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:01:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			*ft_sprintf(char *io, const char *str, ...)
 {
 	va_list		arg;
 	t_args		args;
-	
+
 	init_args(&args, str);
 	if (args.nb_args)
 	{
