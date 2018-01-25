@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:57:09 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 19:00:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:02:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		strings(t_num *a, va_list arg)
 {
-	int		character;
+	int		character[2];
 	void	*string;
 
 	if (a->type == 's')
@@ -24,9 +24,8 @@ void		strings(t_num *a, va_list arg)
 	}
 	else if (a->type == 'c')
 	{
-		character = va_arg(arg, int);
 		a->value = malloc(1);
-		*(a->value) = character;
+		*(a->value) = va_arg(arg, int);
 	}
 	else if (a->type == 'S')
 	{
@@ -36,8 +35,8 @@ void		strings(t_num *a, va_list arg)
 	}
 	else if (a->type == 'C')
 	{
-		character = va_arg(arg, int);
-		a->value = transform_utf8(&character);
-		a->type = 'c';
+		character[0] = va_arg(arg, int);
+		a->value = transform_utf8(character);
+		a->type = 's';
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:47:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:28:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:03:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "create_args.h"
+#include "printf.h"
 
 int			split_type(char *type, t_num *a)
 {
