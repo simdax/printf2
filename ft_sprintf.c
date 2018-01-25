@@ -6,12 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:33:21 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 20:01:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:10:55 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "prototypes_par.h"
 
 static char		*sprint(char *io, t_prout prout)
 {

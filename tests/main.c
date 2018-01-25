@@ -38,17 +38,23 @@ void	print3(char *s1)
 	write(1, "\n", 1);
 }
 
+#include <limits.h>
+
 int		main(int argc, char **argv)
 {
 	char io[100];
+	int free = 5;
+	char c = 'g';
 
+	ft_printf("asdfsad%llAbonhjoue\n", 45);
+	ft_printf("\n%s %C %d %p %x %% %S\n", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
+	ft_printf("%s%d%p%%%S%D%i%o%O%u%U%x%X%c%C\n","bonjour", 42, &c, L"暖炉", LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
 	ft_sprintf(io, "un truc de fou\n");
 	ft_printf("%s", io);
 	ft_sprintf(io, "%    d et %p\n", 45, 0);
 	ft_printf("%s", io);
 	ft_printf("%    p\n", 0);
 	ft_printf("%0+5d\n", 42);
-	ft_printf("asdfsad%abonhjoue\n", 42);
 	ft_printf("%#o\n", 0);
 	print("%-#08x", 42, 0);
 	print("%#08x", 42, 0);

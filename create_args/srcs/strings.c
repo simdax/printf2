@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:57:09 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 20:02:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:50:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		strings(t_num *a, va_list arg)
 {
-	int		character[2];
-	void	*string;
+	static int	character[2] = {0, 0};
+	void		*string;
 
 	if (a->type == 's')
 	{

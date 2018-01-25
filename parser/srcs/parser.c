@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:52:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 11:24:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:56:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ t_flags		parse(char *str)
 	if (*str)
 		take_type(&str, flags.type);
 	change_type(&flags);
+	if (ft_strchr(flags.type, 'E'))
+		++str;
 	flags.count = str - cpy;
 	return (flags);
 }

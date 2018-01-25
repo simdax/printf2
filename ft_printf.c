@@ -6,12 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:55:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:57:43 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "prototypes_par.h"
 
 t_num			flags2print(va_list arg, t_flags flags)
 {
@@ -22,7 +21,11 @@ t_num			flags2print(va_list arg, t_flags flags)
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
 	if (a.type == 'E')
-		a.value = ft_strdup("");
+	{
+		string = va_arg(arg, void*);
+		a.value = ft_strdup("(invalid)");
+		a.type = 's';
+	}
 	else if (ft_strchr("csSC", a.type))
 		strings(&a, arg);
 	else if (a.type == '%')

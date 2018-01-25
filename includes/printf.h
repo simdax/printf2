@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:29:39 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 18:55:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 20:08:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ typedef struct	s_prout
 	const char	*last;
 }				t_prout;
 
-t_num		flags2print(va_list arg, t_flags flags);
-int			count_percents(const char *str);
-void		init_args(t_args *args, const char *str);
-int			ft_printf(const char *str, ...);
-char		*ft_sprintf(char *io, const char *str, ...);
-void		print_and_free(t_num **nums, char ***str, t_array *buffer);
-void		hydrate(t_num *a, t_flags *flags);
+t_num			flags2print(va_list arg, t_flags flags);
+int				count_percents(const char *str);
+void			init_args(t_args *args, const char *str);
+int				ft_printf(const char *str, ...);
+char			*ft_sprintf(char *io, const char *str, ...);
+void			print_and_free(t_num **nums, char ***str, t_array *buffer);
+void			hydrate(t_num *a, t_flags *flags);
 
 #endif
