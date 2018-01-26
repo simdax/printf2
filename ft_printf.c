@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:41:07 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 20:57:43 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/26 11:21:16 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ t_num			flags2print(va_list arg, t_flags flags)
 {
 	t_num		a;
 	intmax_t	value;
-	void		*string;
 
 	hydrate(&a, &flags);
 	split_type(flags.type, &a);
 	if (a.type == 'E')
 	{
-		string = va_arg(arg, void*);
-		a.value = ft_strdup("(invalid)");
+		va_arg(arg, void*);
+		a.value = ft_strdup("");
 		a.type = 's';
 	}
 	else if (ft_strchr("csSC", a.type))

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:29:39 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 20:08:41 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 21:18:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				count_percents(const char *str);
 void			init_args(t_args *args, const char *str);
 int				ft_printf(const char *str, ...);
 char			*ft_sprintf(char *io, const char *str, ...);
-void			print_and_free(t_num **nums, char ***str, t_array *buffer);
+int				print_and_free(t_num **nums, char ***str, t_array *buffer);
 void			hydrate(t_num *a, t_flags *flags);
 
 #endif

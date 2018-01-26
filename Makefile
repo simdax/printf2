@@ -68,6 +68,14 @@ lib:
 b:
 	./prod && make -C build
 
+send: b
+	cd build && git init
+	cd build && make fclean && make -C libft fclean
+	cd build &&	git add .
+	cd build && git remote add 42 vogsphere@vogsphere.42.fr:intra/2018/activities/ft_printf/scornaz
+	cd build && git commit -am gros_pushage
+	cd build && git push -f 42 master
+
 #  ╓─────[ Call me maybe ]─  
 #  ╙───────────────────── ─ ─ 
 .PHONY: all lib clean fclean re

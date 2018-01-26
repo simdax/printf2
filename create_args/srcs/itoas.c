@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:38:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/25 20:03:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/26 11:19:38 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char		*s_itoa(intmax_t v, int maj, t_num *a)
 	tmp[i] = maj ?
 		"0123456789ABCDEF"[val % a->base] :
 		"0123456789abcdef"[val % a->base];
-	res = strdup(tmp + i);
+	res = ft_strdup(tmp + i);
 	free(tmp);
 	return (res);
 }
@@ -61,7 +61,7 @@ static char		*u_itoa(uintmax_t val, int maj, t_num *a)
 	tmp[i] = maj ?
 		"0123456789ABCDEF"[val % a->base] :
 		"0123456789abcdef"[val % a->base];
-	res = strdup(tmp + i);
+	res = ft_strdup(tmp + i);
 	free(tmp);
 	return (res);
 }

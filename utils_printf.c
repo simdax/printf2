@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:52:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 11:05:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/25 21:38:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void		hydrate(t_num *a, t_flags *flags)
 	a->space = flags->space;
 }
 
-void		print_and_free(t_num **nums, char ***str, t_array *buffer)
+int			print_and_free(t_num **nums, char ***str, t_array *buffer)
 {
 	size_t	len;
+	int		ret;
 
 	len = ft_strlen(**str);
 	array_add(buffer, **str, len);
@@ -40,4 +41,5 @@ void		print_and_free(t_num **nums, char ***str, t_array *buffer)
 	free((*nums)->value);
 	free((*nums)->modifiers);
 	++(*nums);
+	return (0);
 }

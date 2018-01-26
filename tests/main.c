@@ -46,6 +46,7 @@ int		main(int argc, char **argv)
 	int free = 5;
 	char c = 'g';
 
+	print2("a%C", 0, 0);
 	ft_printf("asdfsad%llAbonhjoue\n", 45);
 	ft_printf("\n%s %C %d %p %x %% %S\n", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
 	ft_printf("%s%d%p%%%S%D%i%o%O%u%U%x%X%c%C\n","bonjour", 42, &c, L"暖炉", LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
