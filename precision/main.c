@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 11:50:04 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/27 18:50:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/27 19:17:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ void	dec_double(double f)
 		printf("%d",  (c & shift << i) != 0);
 	}
 	printf("sign exp mantisse %d %d %f\n", sign, exp, mantisse);
-	printf("\n%f", sign * ft_pow(2, exp - 1023) * mantisse);
-//	printf("\n%s", print_float(sign * ft_pow(2, exp - 127) * mantisse, 6));
+	printf("\n%a\n", sign * ft_pow(2, exp - 1023) * mantisse);
+	printf("%c%fp%d\n", (sign == -1) ? '-': 0, mantisse, exp - 1023);
+	printf("\n%s", print_float(sign * ft_pow(2, exp - 1023) * mantisse, 6));
 }
 int	main(void)
 {
