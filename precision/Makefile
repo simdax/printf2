@@ -4,3 +4,6 @@ all:
 
 debug:
 	lldb ./a.out
+
+io:
+	gcc -g get_inverse.c && ./a.out
