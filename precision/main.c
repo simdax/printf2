@@ -6,27 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 11:50:04 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/27 14:47:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/27 18:50:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 
 #include <stdio.h>
-
-void get_f(float a)
-{
-	unsigned aa;
-
-	aa = *(int*)&a;
-	int sign = (0x80000000 & aa) != 0;
-	printf("sign %d\n", sign);
-	unsigned mantisse = (aa % 0x10000000);
-	printf("mantisse %d\n", mantisse);
-	unsigned exp = (aa - mantisse) / 0x10000000;
-	printf("exp %d\n", exp);
-
-}
 
 float		ft_pow(int base, int exp)
 {
@@ -40,28 +26,100 @@ float		ft_pow(int base, int exp)
 	return (ret);
 }
 
-int	main(void)
+void	sputnbr(long long cast, char **s)
 {
-	float a = 0.15625;
-	float b = 2.00456;
-	int c = *(int*)&a;
-
-	float sign = 1;
-	int exp = 0;
-	float mantisse = 1;
-	for (int i = 31; i >= 0; i--)
-	{
-		if (i == 31 && (c & 1<<i) != 0)
-			sign = -1;
-		else if (i <= 30 && i >= 23 && ((c & 1<<i) != 0))
-			exp += 1 << (i - 23);
-		else if (i < 23 && (c & 1<<i) != 0)
-			mantisse += ft_pow(2, i - 23);
-//		printf("%d",  (c & 1<<i) != 0);
-	}
-	printf("%f %f %d %f \n", sign, mantisse, exp, ft_pow(10, exp - 127));
-	printf("\n%f", sign * ft_pow(2, exp - 127) * mantisse);
-//	get_f(a);
-//	get_f(b);
+	if (cast > 9)
+		sputnbr(cast / 10, s);
+ 	**s = ('0' + cast % 10);
+	++(*s);
+	if (cast < 10)
+		(*s)[1] = 0;
 }
 
+char	*print_float(double f, int precision)
+{
+	int 	int_part;
+	int		zeros;
+	char	*str;
+	char	*cpy;
+
+	str = malloc(precision > 32 ? precision : 32);
+	cpy = str;
+	int_part = f;
+	sputnbr(int_part, &str);
+	if (precision)
+	{
+		zeros = precision - 15;
+		*str++ = '.';
+		sputnbr((f - int_part)
+			* ft_pow(10, precision < 15 ? precision : 15), &str);
+		while (zeros > 0)
+		{
+			*str++ = '0';
+			--zeros;
+		}
+		*str = 0;
+	}
+	return (cpy);
+}
+
+void io(double q, int b)
+{
+	printf("io %s et %.*f\n", print_float(q, b), b, q);	
+}
+
+
+void	dec_float(float f)
+{
+	int c = *(int*)&f;
+	int sign = 1;
+	int exp = 0;
+	float mantisse = 1;
+
+	int a = 31; int b = 23;
+	for (int i = a; i >= 0; i--)
+	{
+		if (i == a && (c & 1<<i) != 0)
+			sign = -1;
+		else if (i < a && i >= b && ((c & 1<<i) != 0))
+			exp += 1 << (i - b);
+		else if (i < b && (c & 1<<i) != 0)
+			mantisse += ft_pow(2, i - b);
+//		printf("%d",  (c & 1<<i) != 0);
+	}
+	printf("sign exp mantisse %d %d %f\n", sign, exp, mantisse);
+	printf("\n%f", sign * ft_pow(2, exp - 127) * mantisse);
+	printf("\n%s", print_float(sign * ft_pow(2, exp - 127) * mantisse, 6));
+}
+
+#define DOUBLE_EXP 52
+#define DOUBLE_SIGN 63
+
+void	dec_double(double f)
+{
+	long c = *(long*)&f;
+	long shift = 1;
+	int sign = 1;
+	int exp = 0;
+	double mantisse = 1;
+
+	int a = 63; int b = 52;
+	for (int i = a; i >= 0; i--)
+	{
+		if (i == a && (c & shift << i) != 0)
+			sign = -1;
+		else if (i < a && i >= b && ((c & shift << i) != 0))
+			exp += shift  << (i - b);
+		else if (i < b && (c & shift << i) != 0)
+			mantisse += ft_pow(2, i - b);
+		printf("%d",  (c & shift << i) != 0);
+	}
+	printf("sign exp mantisse %d %d %f\n", sign, exp, mantisse);
+	printf("\n%f", sign * ft_pow(2, exp - 1023) * mantisse);
+//	printf("\n%s", print_float(sign * ft_pow(2, exp - 127) * mantisse, 6));
+}
+int	main(void)
+{
+	double q = 35565264.4546454;
+	dec_double(98.89231);
+}
